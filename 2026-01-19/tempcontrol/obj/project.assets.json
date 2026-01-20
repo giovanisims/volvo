@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/giovanisims/github/volvo/2026-01-19/HelloWorld/HelloWorld.csproj",
-      "projectName": "HelloWorld",
-      "projectPath": "/home/giovanisims/github/volvo/2026-01-19/HelloWorld/HelloWorld.csproj",
+      "projectUniqueName": "/home/giovanisims/github/volvo/2026-01-19/tempcontrol/tempcontrol.csproj",
+      "projectName": "tempcontrol",
+      "projectPath": "/home/giovanisims/github/volvo/2026-01-19/tempcontrol/tempcontrol.csproj",
       "packagesPath": "/home/giovanisims/.nuget/packages/",
-      "outputPath": "/home/giovanisims/github/volvo/2026-01-19/HelloWorld/obj/",
+      "outputPath": "/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/giovanisims/.nuget/NuGet/NuGet.Config"

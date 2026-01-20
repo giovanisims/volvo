@@ -1,0 +1,15 @@
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/bin/Debug/net10.0/tempcontrol
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/bin/Debug/net10.0/tempcontrol.deps.json
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/bin/Debug/net10.0/tempcontrol.runtimeconfig.json
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/bin/Debug/net10.0/tempcontrol.dll
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/bin/Debug/net10.0/tempcontrol.pdb
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.GeneratedMSBuildEditorConfig.editorconfig
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.AssemblyInfoInputs.cache
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.AssemblyInfo.cs
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.csproj.CoreCompileInputs.cache
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.sourcelink.json
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.dll
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/refint/tempcontrol.dll
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.pdb
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/tempcontrol.genruntimeconfig.cache
+/home/giovanisims/github/volvo/2026-01-19/tempcontrol/obj/Debug/net10.0/ref/tempcontrol.dll

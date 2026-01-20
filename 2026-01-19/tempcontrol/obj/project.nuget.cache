@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5iZ/wiQIt7w=",
+  "dgSpecHash": "vEygRmm373I=",
   "success": true,
-  "projectFilePath": "/home/giovanisims/github/volvo/2026-01-19/HelloWorld/HelloWorld.csproj",
+  "projectFilePath": "/home/giovanisims/github/volvo/2026-01-19/tempcontrol/tempcontrol.csproj",
   "expectedPackageFiles": [
     "/home/giovanisims/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.0/microsoft.aspnetcore.app.ref.10.0.0.nupkg.sha512"
   ],
