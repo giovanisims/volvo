@@ -1,0 +1,15 @@
+/home/giovanisims/github/volvo/2026-01-20/bank/bin/Debug/net10.0/bank
+/home/giovanisims/github/volvo/2026-01-20/bank/bin/Debug/net10.0/bank.deps.json
+/home/giovanisims/github/volvo/2026-01-20/bank/bin/Debug/net10.0/bank.runtimeconfig.json
+/home/giovanisims/github/volvo/2026-01-20/bank/bin/Debug/net10.0/bank.dll
+/home/giovanisims/github/volvo/2026-01-20/bank/bin/Debug/net10.0/bank.pdb
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.GeneratedMSBuildEditorConfig.editorconfig
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.AssemblyInfoInputs.cache
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.AssemblyInfo.cs
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.csproj.CoreCompileInputs.cache
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.sourcelink.json
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.dll
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/refint/bank.dll
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.pdb
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/bank.genruntimeconfig.cache
+/home/giovanisims/github/volvo/2026-01-20/bank/obj/Debug/net10.0/ref/bank.dll

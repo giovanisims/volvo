@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "LtNqaZzaiaA=",
+  "success": true,
+  "projectFilePath": "/home/giovanisims/github/volvo/2026-01-20/bank/bank.csproj",
+  "expectedPackageFiles": [
+    "/home/giovanisims/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.0/microsoft.aspnetcore.app.ref.10.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
