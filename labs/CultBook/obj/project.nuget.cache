@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0+sWY3o+5KQ=",
+  "success": true,
+  "projectFilePath": "/home/giovanisims/github/volvo/labs/CultBook/CultBook.csproj",
+  "expectedPackageFiles": [
+    "/home/giovanisims/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.0/microsoft.aspnetcore.app.ref.10.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
