@@ -26,8 +26,19 @@ public class Livro
         Categoria = categoria;
     }
 
-    // public void Imprimir()
-    // {
-    //     Console.WriteLine($"Livro: {Titulo} ({Autor}) - {Categoria}, ISBN: {Isbn}, Preço: {Preco:C}, Estoque: {Estoque}");
-    // }
+    public void Imprimir()
+    {
+        Console.WriteLine($"""
+        ISBN: {Isbn}
+        Título: {Titulo}
+        Descrição: {Descricao}
+        Autor: {Autor}
+        Estoque: {Estoque}
+        Preço: {Preco:C}
+        Figura: {Figura}
+        Data de Cadastro: {DataCadastro:d}
+        Categoria: {Categoria}
+        
+        """);
+    }
 }

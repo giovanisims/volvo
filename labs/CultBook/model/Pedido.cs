@@ -12,6 +12,8 @@ public class Pedido
 // Lowercase field names because apparently that's the convention in C#
     private Endereco endereco;
     private ItemDePedido[] itens;
+    // Need this to keep track when adding multiple different items to this order
+    private int indiceArray;
 
 
     public Pedido(int numero, DateTime dataEmissao, string formaPagamento, double valorTotal, string situacao)
@@ -21,6 +23,8 @@ public class Pedido
         FormaPagamento = formaPagamento;
         ValorTotal = valorTotal;
         Situacao = situacao;
+
+         indiceArray = 0;
 
         // The array here is beign initialized with a fixed size, probably fixing that in the next class 
         itens = new ItemDePedido[10];
@@ -38,14 +42,32 @@ public class Pedido
 
     public Endereco GetEndereco()
     {
-        // Optional "this." parameter here 
         return endereco;
     }
 
-    public void InserirItem(ItemDePedido item) { }
+    public void InserirItem(ItemDePedido item)
+    {
+        if (indiceArray < itens.Length)
+        {
+            itens[indiceArray] = item;
 
-    // public void Imprimir()
-    // {
-    //     Console.WriteLine($"Pedido #{Numero} - Emissão: {DataEmissao}, Pagamento: {FormaPagamento}, Total: {ValorTotal:C}, Situação: {Situacao}");
-    // }
+            ValorTotal += item.Preco * item.Qtde;
+
+            item.SetPedido(this);
+
+            indiceArray++;
+        }
+    }
+
+    public void Imprimir()
+    {
+        Console.WriteLine($"""
+        Número: {Numero}
+        Data de Emissão: {DataEmissao:d}
+        Forma de Pagamento: {FormaPagamento}
+        Valor Total: {ValorTotal:C}
+        Situação: {Situacao}
+        
+        """);
+    }
 }
