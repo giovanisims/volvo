@@ -1,8 +1,8 @@
 namespace CultBook.view.console;
 
-public class MostrarMenu
+public class Menu
 {
-    public string Menu()
+    public string MostrarMenu()
     {
         Console.WriteLine("""
 
@@ -14,7 +14,7 @@ public class MostrarMenu
         [3] Look-Up Books
         [4] Add Books To Cart
         [5] Remove Books From Cart
-        [6] Look-Up Cart
+        [6] See Cart
         [7] Complete Purchase
         [8] Quit
         ==============================

@@ -10,7 +10,7 @@ public class ItemDePedido
 
     public ItemDePedido(Livro livro, int qtde)
     {
-        Livro = livro;
+        this.livro = livro;
         Qtde = qtde;
         Preco = livro.Preco;
     }
