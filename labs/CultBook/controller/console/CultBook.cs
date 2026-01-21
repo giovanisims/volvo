@@ -1,5 +1,4 @@
-﻿using System.Net.ServerSentEvents;
-using System.Runtime.CompilerServices;
+﻿using System; // This is used for Console and Datetime
 using CultBook.model;
 using CultBook.view.console;
 
@@ -7,7 +6,7 @@ namespace CultBook.controller.console;
 
 public class CultBook
 {
-    private Livro[] livrosDaLoja;
+    private FabricaDeLivros fabrica;
     private Pedido pedidoAtual;
     private Menu menu;
 
@@ -17,12 +16,7 @@ public class CultBook
     {
         menu = new Menu();
 
-        livrosDaLoja = new Livro[5];
-        livrosDaLoja[0] = new Livro("111", "C# Guide", "Learn C#", "Microsoft", 10, 50.00, "img1", DateTime.Now, "Tech");
-        livrosDaLoja[1] = new Livro("222", "Clean Code", "Best practices", "Uncle Bob", 5, 120.00, "img2", DateTime.Now, "Tech");
-        livrosDaLoja[2] = new Livro("333", "The Witcher", "Geralt's journey", "Sapkowski", 2, 45.00, "img3", DateTime.Now, "Fantasy");
-        livrosDaLoja[3] = new Livro("444", "Dune", "Sand worms", "Herbert", 8, 60.00, "img4", DateTime.Now, "SciFi");
-        livrosDaLoja[4] = new Livro("555", "1984", "Big Brother", "Orwell", 10, 30.00, "img5", DateTime.Now, "Fiction");
+        fabrica = new FabricaDeLivros();
     }
 
     static void Main(string[] args)
@@ -62,7 +56,7 @@ public class CultBook
                     if (app.loggedIn)
                     {
                         Console.WriteLine("Compra realizada com sucesso!");
-                        pedidoAtual == null;
+                        app.pedidoAtual = null;
                     }
                     else
                     {
@@ -88,28 +82,25 @@ public class CultBook
 
     public void BuscarLivros()
     {
-        foreach (Livro l in livrosDaLoja)
+        Livro[] livros = fabrica.BuscarTodos();
+
+        Console.WriteLine("=== LIVROS DISPONÍVEIS ===");
+        foreach (Livro l in livros)
         {
-            l.Imprimir();
+            if (l != null){
+                l.Imprimir();
+            }
         }
     }
 
-    public void InserirLivro()
+public void InserirLivro()
     {
-        Livro selectedBook = null;
-        int amnt = 0;
-
-        // Check if book exists
+        // 1. Get Input
         Console.Write("Digite o ISBN do livro que deseja comprar: ");
         string isbn = Console.ReadLine();
-        foreach (Livro l in livrosDaLoja)
-        {
-            if (l != null && isbn == l.Isbn)
-            {
-                selectedBook = l;
-                break;
-            }
-        }
+
+        // foreach loop was moved to FabricaDeLivro
+        Livro selectedBook = fabrica.BuscarLivro(isbn);
 
         if (selectedBook == null)
         {
@@ -117,21 +108,22 @@ public class CultBook
             return;
         }
 
-
-        // Check if the amount of books is valid
-        Console.WriteLine("Quantas copias voce quer?");
-        amnt = int.Parse(Console.ReadLine());
-        if (amnt > selectedBook.Estoque || amnt <= 0)
+        Console.Write($"Livro '{selectedBook.Titulo}' encontrado! Digite a quantidade: ");
+        if (!int.TryParse(Console.ReadLine(), out int amnt) || amnt <= 0)
         {
-            Console.WriteLine("Quantidade Invalida");
+             Console.WriteLine("Quantidade Inválida");
+             return;
+        }
+
+        if (amnt > selectedBook.Estoque)
+        {
+            Console.WriteLine("Estoque insuficiente.");
             return;
         }
 
-        // Check if the order exists
         if (this.pedidoAtual == null)
         {
             Console.WriteLine("Criando novo pedido...");
-            // remember to remove this placeholder later !!!!
             this.pedidoAtual = new Pedido(1, DateTime.Now, "Pix", 0.0, "Aberto");
         }
 
@@ -139,9 +131,8 @@ public class CultBook
         this.pedidoAtual.InserirItem(item);
 
         Console.WriteLine("Item adicionado ao seu pedido com sucesso!");
-
-
     }
+
     public void VerCarrinho()
     {
         Console.WriteLine("=== SEU CARRINHO ===");

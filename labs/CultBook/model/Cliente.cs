@@ -1,4 +1,3 @@
-
 namespace CultBook.model;
 
 public class Cliente
