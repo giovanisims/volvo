@@ -11,8 +11,8 @@ public class Cliente
 
     private Pedido[] pedidos;
     private Endereco[] enderecos;
-    public Cliente() { }
-
+    private int indicePedidos = 0;
+    private int indiceEnderecos = 0;
     public Cliente(string nome, string login, string senha, string email, string fone)
     {
         Nome = nome;
@@ -35,9 +35,23 @@ public class Cliente
         return enderecos;
     }
 
-    public void InserirEndereco(Endereco endereco) { }
+    public void InserirEndereco(Endereco endereco)
+    {
+        if (indiceEnderecos < enderecos.Length)
+        {
+            enderecos[indiceEnderecos] = endereco;
+            indiceEnderecos++;
+        }
+    }
 
-    public void InserirPedido(Pedido pedido) { }
+    public void InserirPedido(Pedido pedido)
+    {
+        if (indicePedidos < pedidos.Length)
+        {
+            pedidos[indicePedidos] = pedido;
+            indicePedidos++;
+        }
+    }
 
     // public void Imprimir()
     // {

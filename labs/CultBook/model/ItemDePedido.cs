@@ -30,8 +30,13 @@ public class ItemDePedido
         this.pedido = pedido;
     }
 
-    // public void Imprimir()
-    // {
-    //     Console.WriteLine($"Item de Pedido: Quantidade: {Qtde}, Preço Unitário: {Preco:C}, Total: {(Qtde * Preco):C}");
-    // }
+public void Imprimir()
+    {
+        Console.WriteLine($"""
+        Item: {livro.Titulo}
+        Quantidade: {Qtde}
+        Preço Unitário: {Preco:C}
+        Total: {Qtde * Preco:C}
+        """);
+    }
 }

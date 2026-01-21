@@ -9,7 +9,7 @@ public class Pedido
     public double ValorTotal { get; set; }
     public string Situacao { get; set; }
 
-// Lowercase field names because apparently that's the convention in C#
+    // Lowercase field names because apparently that's the convention in C#
     private Endereco endereco;
     private ItemDePedido[] itens;
     // Need this to keep track when adding multiple different items to this order
@@ -24,7 +24,7 @@ public class Pedido
         ValorTotal = valorTotal;
         Situacao = situacao;
 
-         indiceArray = 0;
+        indiceArray = 0;
 
         // The array here is beign initialized with a fixed size, probably fixing that in the next class 
         itens = new ItemDePedido[10];
@@ -59,7 +59,7 @@ public class Pedido
         }
     }
 
-    public void Imprimir()
+public void Imprimir()
     {
         Console.WriteLine($"""
         Número: {Numero}
@@ -67,7 +67,16 @@ public class Pedido
         Forma de Pagamento: {FormaPagamento}
         Valor Total: {ValorTotal:C}
         Situação: {Situacao}
-        
+        Items do Pedido:
         """);
+
+        // Not sure if I need to actually show the books here but better safe than sorry
+        for (int i = 0; i < indiceArray; i++)
+        {
+            if (itens[i] != null)
+            {
+                itens[i].Imprimir();
+            }
+        }
     }
 }
