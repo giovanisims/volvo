@@ -23,8 +23,8 @@ public class Endereco
         Cep = cep;
     }
 
-    public void Imprimir()
-    {
-        Console.WriteLine($"Endereço: {Rua}, {Numero}, Comp: {Complemento} - {Bairro}, {Cidade}/{Estado} - CEP: {Cep}");
-    }
+    // public void Imprimir()
+    // {
+    //     Console.WriteLine($"Endereço: {Rua}, {Numero}, Comp: {Complemento} - {Bairro}, {Cidade}/{Estado} - CEP: {Cep}");
+    // }
 }

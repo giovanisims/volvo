@@ -2,12 +2,11 @@ namespace CultBook.model;
 
 public class ItemDePedido
 {
-    public int Qtde{get; set;}
-    public double Preco{get; set;}
-    public Pedido Pedido { get; set; }
-    public Livro Livro { get; set; }
+    public int Qtde { get; set; }
+    public double Preco { get; set; }
+    private Pedido pedido;
+    private Livro livro;
 
-    public ItemDePedido() { }
 
     public ItemDePedido(Livro livro, int qtde)
     {
@@ -16,8 +15,23 @@ public class ItemDePedido
         Preco = livro.Preco;
     }
 
-    public void Imprimir()
+    public Livro GetLivro()
     {
-        Console.WriteLine($"Item de Pedido: Quantidade: {Qtde}, Preço Unitário: {Preco:C}, Total: {(Qtde * Preco):C}");
+        return livro;
     }
+
+    public Pedido GetPedido()
+    {
+        return pedido;
+    }
+
+    public void SetPedido(Pedido pedido)
+    {
+        this.pedido = pedido;
+    }
+
+    // public void Imprimir()
+    // {
+    //     Console.WriteLine($"Item de Pedido: Quantidade: {Qtde}, Preço Unitário: {Preco:C}, Total: {(Qtde * Preco):C}");
+    // }
 }

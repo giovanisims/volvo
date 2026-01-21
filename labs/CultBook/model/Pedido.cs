@@ -3,15 +3,16 @@ namespace CultBook.model;
 
 public class Pedido
 {
-    public int Numero {get; set;}
-    public DateTime DataEmissao {get; set;}
-    public string FormaPagamento {get; set;}
-    public double ValorTotal {get; set;}
-    public string Situacao {get; set;}
-    public Endereco Endereco {get; set;}
-    public ItemDePedido[] Itens { get; set; }
+    public int Numero { get; set; }
+    public DateTime DataEmissao { get; set; }
+    public string FormaPagamento { get; set; }
+    public double ValorTotal { get; set; }
+    public string Situacao { get; set; }
 
-    public Pedido() { }
+// Lowercase field names because apparently that's the convention in C#
+    private Endereco endereco;
+    private ItemDePedido[] itens;
+
 
     public Pedido(int numero, DateTime dataEmissao, string formaPagamento, double valorTotal, string situacao)
     {
@@ -20,38 +21,31 @@ public class Pedido
         FormaPagamento = formaPagamento;
         ValorTotal = valorTotal;
         Situacao = situacao;
-        Itens = new ItemDePedido[0];
+
+        // The array here is beign initialized with a fixed size, probably fixing that in the next class 
+        itens = new ItemDePedido[10];
+    }
+
+    public ItemDePedido[] GetItens()
+    {
+        return itens;
     }
 
     public void SetEndereco(Endereco endereco)
     {
-        Endereco = endereco;
+        this.endereco = endereco;
     }
 
-    public void InserirItem(Livro livro)
+    public Endereco GetEndereco()
     {
-        ItemDePedido[] temp = Itens;
-        Array.Resize(ref temp, (temp?.Length ?? 0) + 1);
-        Itens = temp;
-        
-        ItemDePedido novoItem = new ItemDePedido(livro, 1);
-        novoItem.Pedido = this;
-        
-        Itens[Itens.Length - 1] = novoItem;
-        
-        ValorTotal += novoItem.Preco * novoItem.Qtde;
+        // Optional "this." parameter here 
+        return endereco;
     }
 
-    public void Mostrar()
-    {
-        Console.WriteLine($"Pedido #{Numero} - Emissão: {DataEmissao}, Pagamento: {FormaPagamento}, Total: {ValorTotal:C}, Situação: {Situacao}");
-        if (Endereco != null) Console.WriteLine("Endereço de Entrega: " + Endereco.Rua);
-        if (Itens != null)
-        {
-            foreach (var item in Itens)
-            {
-                item.Imprimir();
-            }
-        }
-    }
+    public void InserirItem(ItemDePedido item) { }
+
+    // public void Imprimir()
+    // {
+    //     Console.WriteLine($"Pedido #{Numero} - Emissão: {DataEmissao}, Pagamento: {FormaPagamento}, Total: {ValorTotal:C}, Situação: {Situacao}");
+    // }
 }
