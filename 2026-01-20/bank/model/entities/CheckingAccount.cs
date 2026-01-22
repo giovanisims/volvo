@@ -9,18 +9,14 @@ public class CheckingAccount
     private double _balance;
     public double Balance
     {
-        get { return _balance;}
-        
-        private set { _balance = value; }
+        get { return _balance; }
+        protected set { _balance = value; } // Changed from private to protected
     }
     private string Password;
 
-    public CheckingAccount()
+    public CheckingAccount() : this(0, password: "", owner: "")
     {
-        Number = 0;
-        Owner = "";
-        Balance = 0;
-        Password = "";
+ 
     }
 
     public CheckingAccount(int number, string owner, string password)
@@ -39,7 +35,7 @@ public class CheckingAccount
         }
     }
 
-    public void Withdraw(double amnt)
+    public virtual void Withdraw(double amnt) // Added virtual
     {
         if (Balance >= amnt)
         {

@@ -95,7 +95,6 @@ public class CultBook
 
 public void InserirLivro()
     {
-        // 1. Get Input
         Console.Write("Digite o ISBN do livro que deseja comprar: ");
         string isbn = Console.ReadLine();
 
