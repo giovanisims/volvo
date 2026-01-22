@@ -23,9 +23,9 @@ public class CultBook
     private Cliente[] clientes = new Cliente[]
     {
         new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999", 
-            new Endereco("Rua XV", 123, "Centro", "Curitiba", "PR", "80000-000")),
+            new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000")),
         new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000", 
-            new Endereco("Rua Imaculada", 1155, "Prado Velho", "Curitiba", "PR", "80215-901"))
+            new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901"))
     };
 
     Livro[] livros = new Livro[]

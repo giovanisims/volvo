@@ -8,7 +8,7 @@ public class ServicoAutenticacao
     {
         if (usuario.ValidarSenha(senhaTentativa))
         {
-            Console.WriteLine($"Bem vindo {usuario}!");
+            Console.WriteLine($"Bem vindo {usuario.Login}!");
         }
         else
         {
