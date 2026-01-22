@@ -1,4 +1,5 @@
 using model;
+using controller.console;
 
 public class CultBook
 {
@@ -17,6 +18,15 @@ public class CultBook
     private const int OP_SAIR = 8;
     private const int INITIAL_QTDE = 1;
     private const int FIRST_PEDIDO_NUMBER = 1;
+    private ServicoAutenticacao Sa = new();
+
+    private Cliente[] clientes = new Cliente[]
+    {
+        new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999", 
+            new Endereco("Rua XV", 123, "Centro", "Curitiba", "PR", "80000-000")),
+        new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000", 
+            new Endereco("Rua Imaculada", 1155, "Prado Velho", "Curitiba", "PR", "80215-901"))
+    };
 
     Livro[] livros = new Livro[]
     {
@@ -128,8 +138,35 @@ public class CultBook
 
     private void Login()
     {
-        Console.WriteLine("Login em construção.");
-        _logado = true; // "login executado" habilita compra
+       {
+        Console.Write("Usuário: ");
+        string? loginDigitado = Console.ReadLine();
+        Console.Write("Senha: ");
+        string? senhaDigitada = Console.ReadLine();
+
+        Cliente? usuario = null;
+        foreach (var c in clientes)
+        {
+            if (c.Login == loginDigitado) {
+                usuario = c;
+                break;
+            }
+        }
+        
+        // I would never implement authentication this way but the diagram specifies
+        // that the RealizarLogin function has to return void so I had to do it like this
+        if (usuario != null)
+        {
+            _logado = usuario.ValidarSenha(senhaDigitada ?? "");
+            
+            Sa.RealizarLogin(usuario, senhaDigitada ?? "");
+        }
+        else
+        {
+            Console.WriteLine("Usuário não encontrado.");
+            _logado = false;
+        }
+    }
     }
 
     public void BuscarLivros()

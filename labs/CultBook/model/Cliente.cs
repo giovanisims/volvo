@@ -1,11 +1,11 @@
 namespace model;
 using System.Text; // Used by string builder
 
-public class Cliente
+public class Cliente : IAutenticavel
 {
     public string Nome { get; set; }
     public string Login { get; set; }
-    public string Senha { get; set; }
+    private string _senha;
     public string Email { get; set; }
     public string Fone { get; set; }
 
@@ -22,7 +22,7 @@ public class Cliente
     {
         Nome = nome;
         Login = login;
-        Senha = senha;
+        _senha = senha;
         Email = email;
         Fone = fone;
 
@@ -33,6 +33,15 @@ public class Cliente
         _qtdPedidos = 0;
 
         InserirEndereco(endereco);
+    }
+
+    public void SetSenha(string novaSenha) {
+        _senha = novaSenha;
+    }
+
+    public bool ValidarSenha(string senha)
+    {
+        return _senha == senha;
     }
 
     public bool InserirPedido(Pedido pedido)
@@ -65,7 +74,7 @@ public class Cliente
             === Cliente ===
             Nome: {Nome}
             Login: {Login}
-            Senha: {Senha}
+            Senha: {_senha}
             Email: {Email}
             Fone: {Fone}
             """);
