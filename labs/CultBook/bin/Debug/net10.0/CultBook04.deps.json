@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "CultBook/1.0.0": {
+      "CultBook04/1.0.0": {
         "runtime": {
-          "CultBook.dll": {}
+          "CultBook04.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "CultBook/1.0.0": {
+    "CultBook04/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

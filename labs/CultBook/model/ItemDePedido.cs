@@ -1,42 +1,24 @@
-namespace CultBook.model;
+namespace model;
 
 public class ItemDePedido
 {
     public int Qtde { get; set; }
     public double Preco { get; set; }
-    private Pedido pedido;
-    private Livro livro;
+    public Livro Livro { get; set; } 
 
-
-    public ItemDePedido(Livro livro, int qtde)
+    public ItemDePedido(Livro livro, int qtde = 1, double preco = 0)
     {
-        this.livro = livro;
+        Livro = livro;
         Qtde = qtde;
-        Preco = livro.Preco;
+        Preco = preco;
     }
 
-    public Livro GetLivro()
+    public void Mostrar()
     {
-        return livro;
-    }
-
-    public Pedido GetPedido()
-    {
-        return pedido;
-    }
-
-    public void SetPedido(Pedido pedido)
-    {
-        this.pedido = pedido;
-    }
-
-public void Imprimir()
-    {
-        Console.WriteLine($"""
-        Item: {livro.Titulo}
-        Quantidade: {Qtde}
-        Preço Unitário: {Preco:C}
-        Total: {Qtde * Preco:C}
-        """);
+        Console.WriteLine("=== ItemDePedido ===");
+        Console.WriteLine($"Qtde: {Qtde}");
+        Console.WriteLine($"Preco: {Preco}");
+        Console.WriteLine("Livro do item:");
+        Livro.Mostrar();
     }
 }

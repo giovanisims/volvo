@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/giovanisims/github/volvo/labs/CultBook/CultBook.csproj",
-      "projectName": "CultBook",
-      "projectPath": "/home/giovanisims/github/volvo/labs/CultBook/CultBook.csproj",
+      "projectUniqueName": "/home/giovanisims/github/volvo/labs/CultBook/CultBook04.csproj",
+      "projectName": "CultBook04",
+      "projectPath": "/home/giovanisims/github/volvo/labs/CultBook/CultBook04.csproj",
       "packagesPath": "/home/giovanisims/.nuget/packages/",
       "outputPath": "/home/giovanisims/github/volvo/labs/CultBook/obj/",
       "projectStyle": "PackageReference",

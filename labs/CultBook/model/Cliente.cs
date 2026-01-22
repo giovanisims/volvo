@@ -1,4 +1,4 @@
-namespace CultBook.model;
+namespace model;
 
 public class Cliente
 {
@@ -8,52 +8,70 @@ public class Cliente
     public string Email { get; set; }
     public string Fone { get; set; }
 
-    private Pedido[] pedidos;
-    private Endereco[] enderecos;
-    private int indicePedidos = 0;
-    private int indiceEnderecos = 0;
-    public Cliente(string nome, string login, string senha, string email, string fone)
+    public Endereco[] Enderecos { get; set; }
+    public Pedido[] Pedidos { get; set; }
+
+    private int _qtdEnderecos;
+    private int _qtdPedidos;
+
+    public Cliente(string nome, string login, string senha, string email, string fone, Endereco endereco)
     {
         Nome = nome;
         Login = login;
         Senha = senha;
         Email = email;
         Fone = fone;
-        // Also fixed size gotta fix that
-        pedidos = new Pedido[10];
-        enderecos = new Endereco[5];
+
+        Enderecos = new Endereco[10];
+        Pedidos = new Pedido[10];
+
+        _qtdEnderecos = 0;
+        _qtdPedidos = 0;
+
+        InserirEndereco(endereco);
     }
 
-    public Pedido[] GetPedidos()
+    public bool InserirPedido(Pedido pedido)
     {
-        return pedidos;
+        if (_qtdPedidos >= Pedidos.Length)
+            return false;
+
+        Pedidos[_qtdPedidos] = pedido;
+        _qtdPedidos++;
+        return true;
     }
 
-    public Endereco[] GetEnderecos()
+    public bool InserirEndereco(Endereco endereco)
     {
-        return enderecos;
+        if (_qtdEnderecos >= Enderecos.Length)
+            return false;
+
+        Enderecos[_qtdEnderecos] = endereco;
+        _qtdEnderecos++;
+        return true;
     }
 
-    public void InserirEndereco(Endereco endereco)
+    public void Mostrar()
     {
-        if (indiceEnderecos < enderecos.Length)
+        Console.WriteLine("=== Cliente ===");
+        Console.WriteLine($"Nome: {Nome}");
+        Console.WriteLine($"Login: {Login}");
+        Console.WriteLine($"Senha: {Senha}");
+        Console.WriteLine($"Email: {Email}");
+        Console.WriteLine($"Fone: {Fone}");
+
+        Console.WriteLine("Enderecos:");
+        for (int i = 0; i < _qtdEnderecos; i++)
         {
-            enderecos[indiceEnderecos] = endereco;
-            indiceEnderecos++;
+            Console.WriteLine($"--- Endereco {i + 1} ---");
+            Enderecos[i].Mostrar();
+        }
+
+        Console.WriteLine("Pedidos:");
+        for (int i = 0; i < _qtdPedidos; i++)
+        {
+            Console.WriteLine($"--- Pedido {i + 1} ---");
+            Pedidos[i].Mostrar();
         }
     }
-
-    public void InserirPedido(Pedido pedido)
-    {
-        if (indicePedidos < pedidos.Length)
-        {
-            pedidos[indicePedidos] = pedido;
-            indicePedidos++;
-        }
-    }
-
-    // public void Imprimir()
-    // {
-    //     Console.WriteLine($"Cliente: {Nome}, Login: {Login}, Email: {Email}, Fone: {Fone}");
-    // }
 }

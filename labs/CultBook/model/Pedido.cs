@@ -1,82 +1,73 @@
-
-namespace CultBook.model;
+namespace model;
 
 public class Pedido
 {
     public int Numero { get; set; }
-    public DateTime DataEmissao { get; set; }
+    public string DataEmissao { get; set; }
     public string FormaPagamento { get; set; }
     public double ValorTotal { get; set; }
     public string Situacao { get; set; }
 
-    // Lowercase field names because apparently that's the convention in C#
-    private Endereco endereco;
-    private ItemDePedido[] itens;
-    // Need this to keep track when adding multiple different items to this order
-    private int indiceArray;
+    public Cliente? Cliente { get; set; }
+    public Endereco? EnderecoEntrega { get; set; }
 
+    public ItemDePedido[] Itens { get; set; }
+    private int _qtdItens;
 
-    public Pedido(int numero, DateTime dataEmissao, string formaPagamento, double valorTotal, string situacao)
+    public Pedido(int numero, string dataEmissao, string formaPagamento,
+                  string situacao, ItemDePedido item)
     {
         Numero = numero;
         DataEmissao = dataEmissao;
         FormaPagamento = formaPagamento;
-        ValorTotal = valorTotal;
         Situacao = situacao;
 
-        indiceArray = 0;
+        Itens = new ItemDePedido[10];
+        _qtdItens = 0;
+        ValorTotal = 0;
 
-        // The array here is beign initialized with a fixed size, probably fixing that in the next class 
-        itens = new ItemDePedido[10];
+        InserirItem(item);
     }
 
-    public ItemDePedido[] GetItens()
+    public bool InserirItem(ItemDePedido item)
     {
-        return itens;
+        // array fixo: insere se houver espaço
+        if (_qtdItens >= Itens.Length)
+            return false;
+
+        Itens[_qtdItens] = item;
+        _qtdItens++;
+
+        ValorTotal += item.Preco * item.Qtde;
+        return true;
     }
 
-    public void SetEndereco(Endereco endereco)
+    public void Mostrar()
     {
-        this.endereco = endereco;
-    }
+        Console.WriteLine("=== Pedido ===");
+        Console.WriteLine($"Numero: {Numero}");
+        Console.WriteLine($"DataEmissao: {DataEmissao}");
+        Console.WriteLine($"FormaPagamento: {FormaPagamento}");
+        Console.WriteLine($"Situacao: {Situacao}");
+        Console.WriteLine($"ValorTotal: {ValorTotal}");
 
-    public Endereco GetEndereco()
-    {
-        return endereco;
-    }
-
-    public void InserirItem(ItemDePedido item)
-    {
-        if (indiceArray < itens.Length)
+        if (Cliente != null)
         {
-            itens[indiceArray] = item;
-
-            ValorTotal += item.Preco * item.Qtde;
-
-            item.SetPedido(this);
-
-            indiceArray++;
+            Console.WriteLine("Cliente:");
+            Cliente.Mostrar();
         }
-    }
 
-public void Imprimir()
-    {
-        Console.WriteLine($"""
-        Número: {Numero}
-        Data de Emissão: {DataEmissao:d}
-        Forma de Pagamento: {FormaPagamento}
-        Valor Total: {ValorTotal:C}
-        Situação: {Situacao}
-        Items do Pedido:
-        """);
-
-        // Not sure if I need to actually show the books here but better safe than sorry
-        for (int i = 0; i < indiceArray; i++)
+        if (EnderecoEntrega != null)
         {
-            if (itens[i] != null)
-            {
-                itens[i].Imprimir();
-            }
+            Console.WriteLine("EnderecoEntrega:");
+            EnderecoEntrega.Mostrar();
+        }
+
+        Console.WriteLine("Itens:");
+        for (int i = 0; i < _qtdItens; i++)
+        {
+            Console.WriteLine($"--- Item {i + 1} ---");
+            Itens[i].Mostrar();
         }
     }
 }

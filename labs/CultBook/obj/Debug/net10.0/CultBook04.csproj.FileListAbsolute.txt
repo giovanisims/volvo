@@ -1,0 +1,15 @@
+/home/giovanisims/github/volvo/labs/CultBook/bin/Debug/net10.0/CultBook04
+/home/giovanisims/github/volvo/labs/CultBook/bin/Debug/net10.0/CultBook04.deps.json
+/home/giovanisims/github/volvo/labs/CultBook/bin/Debug/net10.0/CultBook04.runtimeconfig.json
+/home/giovanisims/github/volvo/labs/CultBook/bin/Debug/net10.0/CultBook04.dll
+/home/giovanisims/github/volvo/labs/CultBook/bin/Debug/net10.0/CultBook04.pdb
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.GeneratedMSBuildEditorConfig.editorconfig
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.AssemblyInfoInputs.cache
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.AssemblyInfo.cs
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.csproj.CoreCompileInputs.cache
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.sourcelink.json
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.dll
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/refint/CultBook04.dll
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.pdb
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/CultBook04.genruntimeconfig.cache
+/home/giovanisims/github/volvo/labs/CultBook/obj/Debug/net10.0/ref/CultBook04.dll
