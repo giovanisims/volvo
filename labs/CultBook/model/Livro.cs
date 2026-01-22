@@ -1,6 +1,6 @@
 namespace model;
 
-public class Livro
+public abstract class Livro
 {
     public string Isbn { get; }
     public string Titulo { get; set; }
@@ -10,7 +10,7 @@ public class Livro
     public double Preco { get; set; }
     public string Categoria { get; set; }
 
-    public Livro(string isbn, string titulo, string descricao, string autor,
+    protected Livro(string isbn, string titulo, string descricao, string autor,
                          int estoque, double preco, string categoria)
     {
         Isbn = isbn;
@@ -21,6 +21,8 @@ public class Livro
         Preco = preco;
         Categoria = categoria;
     }
+
+    public abstract double CalcularPrecoTotal();
 
     public override string ToString()
     {

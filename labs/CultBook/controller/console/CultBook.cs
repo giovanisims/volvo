@@ -15,17 +15,26 @@ public class CultBook
     private const int OP_VER_CARRINHO = 6;
     private const int OP_COMPRA = 7;
     private const int OP_SAIR = 8;
-
     private const int INITIAL_QTDE = 1;
     private const int FIRST_PEDIDO_NUMBER = 1;
 
     Livro[] livros = new Livro[]
     {
-        new Livro("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90, "Fantasia"),
-        new Livro("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90, "Suspense"),
-        new Livro("978-1-56619-909-4", "1984", "Um romance distópico sobre vigilância e totalitarismo.", "George Orwell", 8, 29.90, "Ficção Científica"),
-        new Livro("978-0-452-28423-4", "Orgulho e Preconceito", "Um clássico romance sobre amor e sociedade.", "Jane Austen", 7, 24.90, "Romance"),
-        new Livro("978-0-14-044913-6", "Crime e Castigo", "Um mergulho profundo na mente de um assassino.", "Fiódor Dostoiévski", 4, 34.90, "Ficção")
+        // Normal books (LivroFisico: needs weight and shipping fee)
+        new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90, "Fantasia", 1.2, 15.00),
+        new LivroFisico("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90, "Suspense", 0.6, 12.00),
+        new LivroFisico("978-1-56619-909-4", "1984", "Um romance distópico sobre vigilância e totalitarismo.", "George Orwell", 8, 29.90, "Ficção Científica", 0.4, 10.00),
+        new LivroFisico("978-0-452-28423-4", "Orgulho e Preconceito", "Um clássico romance sobre amor e sociedade.", "Jane Austen", 7, 24.90, "Romance", 0.5, 10.00),
+        new LivroFisico("978-0-14-044913-6", "Crime e Castigo", "Um mergulho profundo na mente de um assassino.", "Fiódor Dostoiévski", 4, 34.90, "Ficção", 0.8, 12.00),
+
+        // Audio books (AudioLivro)
+        new AudioLivro("123-4-56-78901-2", "Dom Casmurro (Audio)", "Clássico de Machado de Assis.", "Machado de Assis", 5, 19.90, "Literatura", "Guilherme Briggs", 12.5),
+        new AudioLivro("321-6-54-09876-5", "Sapiens (Audio)", "Uma breve história da humanidade.", "Yuval Noah Harari", 3, 45.00, "História", "Narrador Padrão", 15.0),
+
+        // eBooks (EBook)
+        new EBook("978-0-13-235088-4", "Clean Code", "A Handbook of Agile Software Craftsmanship.", "Robert C. Martin", 100, 42.00, "Tecnologia", 5.5),
+        new EBook("978-0-13-449416-6", "The Clean Coder", "A Code of Conduct for Professional Programmers.", "Robert C. Martin", 50, 38.50, "Tecnologia", 3.2),
+        new EBook("978-0-201-63361-0", "Design Patterns", "Elements of Reusable Object-Oriented Software.", "Gang of Four", 20, 55.00, "Tecnologia", 12.8),
     };
 
     public static void Main(string[] args)
