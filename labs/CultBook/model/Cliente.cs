@@ -1,4 +1,5 @@
 namespace model;
+using System.Text; // Used by string builder
 
 public class Cliente
 {
@@ -51,27 +52,36 @@ public class Cliente
         return true;
     }
 
-    public void Mostrar()
+    public override string ToString()
     {
-        Console.WriteLine("=== Cliente ===");
-        Console.WriteLine($"Nome: {Nome}");
-        Console.WriteLine($"Login: {Login}");
-        Console.WriteLine($"Senha: {Senha}");
-        Console.WriteLine($"Email: {Email}");
-        Console.WriteLine($"Fone: {Fone}");
+        // "StingBuilder" is used here since we can keep the existing logic 
+        // and pretty much just replace all instances of "WriteLine" with "AppendLine"
+        StringBuilder sb = new();
 
-        Console.WriteLine("Enderecos:");
+        sb.AppendLine($"""
+            === Cliente ===
+            Nome: {Nome}
+            Login: {Login}
+            Senha: {Senha}
+            Email: {Email}
+            Fone: {Fone}
+            """);
+
+        sb.AppendLine("Enderecos:");
         for (int i = 0; i < _qtdEnderecos; i++)
         {
-            Console.WriteLine($"--- Endereco {i + 1} ---");
-            Enderecos[i].Mostrar();
+            sb.AppendLine($"--- Endereco {i + 1} ---");
+            // Append line also works with ToString so we just replace that aswell
+            sb.AppendLine(Enderecos[i].ToString());
         }
 
-        Console.WriteLine("Pedidos:");
+        sb.AppendLine("Pedidos:");
         for (int i = 0; i < _qtdPedidos; i++)
         {
-            Console.WriteLine($"--- Pedido {i + 1} ---");
-            Pedidos[i].Mostrar();
+            sb.AppendLine($"--- Pedido {i + 1} ---");
+            sb.AppendLine(Pedidos[i].ToString());
         }
+
+        return sb.ToString(); // And then we return the ToString method FROM StringBuilder
     }
 }

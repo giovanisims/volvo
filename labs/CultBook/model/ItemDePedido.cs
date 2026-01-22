@@ -1,3 +1,4 @@
+using System.Text;
 namespace model;
 
 public class ItemDePedido
@@ -13,12 +14,18 @@ public class ItemDePedido
         Preco = preco;
     }
 
-    public void Mostrar()
+    public override string ToString()
     {
-        Console.WriteLine("=== ItemDePedido ===");
-        Console.WriteLine($"Qtde: {Qtde}");
-        Console.WriteLine($"Preco: {Preco}");
-        Console.WriteLine("Livro do item:");
-        Livro.Mostrar();
+        StringBuilder sb = new();
+
+        sb.AppendLine($"""
+            === ItemDePedido ===
+            Qtde: {Qtde}
+            Preco: {Preco}
+            Livro do item:
+            """);
+        sb.AppendLine(Livro.ToString());
+
+        return sb.ToString();
     }
 }

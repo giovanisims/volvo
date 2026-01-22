@@ -1,4 +1,5 @@
 namespace model;
+using System.Text;
 
 public class Pedido
 {
@@ -42,32 +43,38 @@ public class Pedido
         return true;
     }
 
-    public void Mostrar()
+    public override string ToString()
     {
-        Console.WriteLine("=== Pedido ===");
-        Console.WriteLine($"Numero: {Numero}");
-        Console.WriteLine($"DataEmissao: {DataEmissao}");
-        Console.WriteLine($"FormaPagamento: {FormaPagamento}");
-        Console.WriteLine($"Situacao: {Situacao}");
-        Console.WriteLine($"ValorTotal: {ValorTotal}");
+        StringBuilder sb = new();
+
+        sb.AppendLine($"""
+            === Pedido ===
+            Numero: {Numero}
+            DataEmissao: {DataEmissao}
+            FormaPagamento: {FormaPagamento}
+            Situacao: {Situacao}
+            ValorTotal: {ValorTotal}
+            """);
 
         if (Cliente != null)
         {
-            Console.WriteLine("Cliente:");
-            Cliente.Mostrar();
+            sb.AppendLine("Cliente:");
+            sb.AppendLine(Cliente.ToString());
         }
 
         if (EnderecoEntrega != null)
         {
-            Console.WriteLine("EnderecoEntrega:");
-            EnderecoEntrega.Mostrar();
+            sb.AppendLine("EnderecoEntrega:");
+            sb.AppendLine(EnderecoEntrega.ToString());
         }
 
-        Console.WriteLine("Itens:");
+        sb.AppendLine("Itens:");
         for (int i = 0; i < _qtdItens; i++)
         {
-            Console.WriteLine($"--- Item {i + 1} ---");
-            Itens[i].Mostrar();
+            sb.AppendLine($"--- Item {i + 1} ---");
+            sb.AppendLine(Itens[i].ToString());
         }
+
+        return sb.ToString();
     }
 }

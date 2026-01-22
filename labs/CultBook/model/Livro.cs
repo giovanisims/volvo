@@ -22,15 +22,17 @@ public class Livro
         Categoria = categoria;
     }
 
-    public void Mostrar()
+    public override string ToString()
     {
-        Console.WriteLine("=== Livro ===");
-        Console.WriteLine($"ISBN: {Isbn}");
-        Console.WriteLine($"Titulo: {Titulo}");
-        Console.WriteLine($"Descricao: {Descricao}");
-        Console.WriteLine($"Autor: {Autor}");
-        Console.WriteLine($"Estoque: {Estoque}");
-        Console.WriteLine($"Preco: {Preco}");
-        Console.WriteLine($"Categoria: {Categoria}");
+        return $"""
+            === Livro ===
+            ISBN: {Isbn}
+            Titulo: {Titulo}
+            Descricao: {Descricao}
+            Autor: {Autor}
+            Estoque: {Estoque}
+            Preco: {Preco}
+            Categoria: {Categoria}
+            """;
     }
 }

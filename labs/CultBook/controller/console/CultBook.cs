@@ -34,22 +34,19 @@ public class CultBook
 
     private void MostrarMenu()
     {
-        Console.WriteLine();
-        Console.WriteLine("=========== CultBook ===========");
-        Console.WriteLine("1) Login");
-        Console.WriteLine("2) Cadastrar");
-        Console.WriteLine("3) Buscar livros");
-        Console.WriteLine("4) Inserir livro no carrinho");
-        Console.WriteLine("5) Remover livro do carrinho");
-        Console.WriteLine("6) Ver carrinho");
+        Console.Write($"""
 
-        if (_logado)
-            Console.WriteLine("7) Efetuar compra");
-        else
-            Console.WriteLine("7) Efetuar compra (desabilitado - faça login)");
-
-        Console.WriteLine("8) Sair");
-        Console.Write("Escolha uma opção: ");
+            =========== CultBook ===========
+            1) Login
+            2) Cadastrar
+            3) Buscar livros
+            4) Inserir livro no carrinho
+            5) Remover livro do carrinho
+            6) Ver carrinho
+            {(_logado ? "7) Efetuar compra" : "7) Efetuar compra (desabilitado - faça login)")}
+            8) Sair
+            Escolha uma opção: 
+            """);
     }
 
     private int LerOpcao()
@@ -120,7 +117,7 @@ public class CultBook
         {
             if (livros[i] != null)
             {
-                livros[i].Mostrar();
+                Console.WriteLine(livros[i].ToString());
             }
         }
     }
@@ -169,7 +166,7 @@ public class CultBook
     {
         if (pedido != null)
         {
-            pedido.Mostrar();
+            Console.WriteLine(pedido.ToString());
         }
         else
         {

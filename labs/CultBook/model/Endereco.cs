@@ -22,15 +22,17 @@ public class Endereco
         Cep = cep;
     }
 
-    public void Mostrar()
+    public override string ToString()
     {
-        Console.WriteLine("=== Endereco ===");
-        Console.WriteLine($"Rua: {Rua}");
-        Console.WriteLine($"Numero: {Numero}");
-        Console.WriteLine($"Complemento: {Complemento}");
-        Console.WriteLine($"Bairro: {Bairro}");
-        Console.WriteLine($"Cidade: {Cidade}");
-        Console.WriteLine($"Estado: {Estado}");
-        Console.WriteLine($"CEP: {Cep}");
+        return $"""
+            === Endereco ===
+            Rua: {Rua}
+            Numero: {Numero}
+            Complemento: {Complemento}
+            Bairro: {Bairro}
+            Cidade: {Cidade}
+            Estado: {Estado}
+            CEP: {Cep}
+            """;
     }
 }
