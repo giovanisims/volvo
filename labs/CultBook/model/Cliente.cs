@@ -12,6 +12,9 @@ public class Cliente
     public Endereco[] Enderecos { get; set; }
     public Pedido[] Pedidos { get; set; }
 
+    private const int MAX_ENDERECOS = 10;
+    private const int MAX_PEDIDOS = 10;
+
     private int _qtdEnderecos;
     private int _qtdPedidos;
 
@@ -23,8 +26,8 @@ public class Cliente
         Email = email;
         Fone = fone;
 
-        Enderecos = new Endereco[10];
-        Pedidos = new Pedido[10];
+        Enderecos = new Endereco[MAX_ENDERECOS];
+        Pedidos = new Pedido[MAX_PEDIDOS];
 
         _qtdEnderecos = 0;
         _qtdPedidos = 0;

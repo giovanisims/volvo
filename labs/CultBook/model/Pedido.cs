@@ -13,6 +13,7 @@ public class Pedido
     public Endereco? EnderecoEntrega { get; set; }
 
     public ItemDePedido[] Itens { get; set; }
+    private const int MAX_ITENS = 10;
     private int _qtdItens;
 
     public Pedido(int numero, string dataEmissao, string formaPagamento,
@@ -23,7 +24,7 @@ public class Pedido
         FormaPagamento = formaPagamento;
         Situacao = situacao;
 
-        Itens = new ItemDePedido[10];
+        Itens = new ItemDePedido[MAX_ITENS];
         _qtdItens = 0;
         ValorTotal = 0;
 

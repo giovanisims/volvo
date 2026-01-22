@@ -1,13 +1,17 @@
-using System.Text;
 namespace model;
+using System.Text;
+
 
 public class ItemDePedido
 {
+    private const int DEFAULT_QTDE = 1;
+    private const double DEFAULT_PRECO = 0;
+
     public int Qtde { get; set; }
     public double Preco { get; set; }
     public Livro Livro { get; set; } 
 
-    public ItemDePedido(Livro livro, int qtde = 1, double preco = 0)
+    public ItemDePedido(Livro livro, int qtde = DEFAULT_QTDE, double preco = DEFAULT_PRECO)
     {
         Livro = livro;
         Qtde = qtde;

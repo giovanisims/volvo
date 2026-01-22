@@ -7,6 +7,18 @@ public class CultBook
 
     private Pedido? pedido;
 
+    private const int OP_LOGIN = 1;
+    private const int OP_CADASTRAR = 2;
+    private const int OP_BUSCAR_LIVROS = 3;
+    private const int OP_INSERIR_CARRINHO = 4;
+    private const int OP_REMOVER_CARRINHO = 5;
+    private const int OP_VER_CARRINHO = 6;
+    private const int OP_COMPRA = 7;
+    private const int OP_SAIR = 8;
+
+    private const int INITIAL_QTDE = 1;
+    private const int FIRST_PEDIDO_NUMBER = 1;
+
     Livro[] livros = new Livro[]
     {
         new Livro("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90, "Fantasia"),
@@ -37,14 +49,14 @@ public class CultBook
         Console.Write($"""
 
             =========== CultBook ===========
-            1) Login
-            2) Cadastrar
-            3) Buscar livros
-            4) Inserir livro no carrinho
-            5) Remover livro do carrinho
-            6) Ver carrinho
-            {(_logado ? "7) Efetuar compra" : "7) Efetuar compra (desabilitado - faça login)")}
-            8) Sair
+            {OP_LOGIN}) Login
+            {OP_CADASTRAR}) Cadastrar
+            {OP_BUSCAR_LIVROS}) Buscar livros
+            {OP_INSERIR_CARRINHO}) Inserir livro no carrinho
+            {OP_REMOVER_CARRINHO}) Remover livro do carrinho
+            {OP_VER_CARRINHO}) Ver carrinho
+            {(_logado ? $"{OP_COMPRA}) Efetuar compra" : $"{OP_COMPRA}) Efetuar compra (desabilitado - faça login)")}
+            {OP_SAIR}) Sair
             Escolha uma opção: 
             """);
     }
@@ -60,31 +72,31 @@ public class CultBook
 
         switch (opcao)
         {
-            case 1:
+            case OP_LOGIN:
                 Login();
                 break;
 
-            case 2:
+            case OP_CADASTRAR:
                 Console.WriteLine("Cadastrar em construção.");
                 break;
 
-            case 3:
+            case OP_BUSCAR_LIVROS:
                 BuscarLivros();
                 break;
 
-            case 4:
+            case OP_INSERIR_CARRINHO:
                 InserirLivro();
                 break;
 
-            case 5:
+            case OP_REMOVER_CARRINHO:
                 Console.WriteLine("Remover livro do carrinho em construção.");
                 break;
 
-            case 6:
+            case OP_VER_CARRINHO:
                 VerCarrinho();
                 break;
 
-            case 7:
+            case OP_COMPRA:
                 if (!_logado)
                 {
                     Console.WriteLine("Efetuar compra está desabilitado. Faça login primeiro.");
@@ -95,7 +107,7 @@ public class CultBook
                 }
                 break;
 
-            case 8:
+            case OP_SAIR:
                 _executando = false;
                 break;
 
@@ -147,12 +159,12 @@ public class CultBook
         }
 
         // Cria item
-        ItemDePedido item = new ItemDePedido(aux, 1, aux.Preco);
+        ItemDePedido item = new ItemDePedido(aux, INITIAL_QTDE, aux.Preco);
 
         // Cria pedido se não existir
         if (pedido == null)
         {
-            pedido = new Pedido(1, "2024-01-01", "Cartão de Crédito", "Em Processamento", item);
+            pedido = new Pedido(FIRST_PEDIDO_NUMBER, "2024-01-01", "Cartão de Crédito", "Em Processamento", item);
         }
         else
         {
