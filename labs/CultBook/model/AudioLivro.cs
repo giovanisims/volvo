@@ -6,7 +6,7 @@ public class AudioLivro : Livro
     public double TempoDeDuracao { get; set; }
 
     public AudioLivro(string isbn, string titulo, string descricao, string autor,
-                      int estoque, double preco, string categoria, 
+                      int estoque, decimal preco, string categoria, 
                       string narrador, double tempoDeDuracao) 
         : base(isbn, titulo, descricao, autor, estoque, preco, categoria)
     {
@@ -14,7 +14,7 @@ public class AudioLivro : Livro
         TempoDeDuracao = tempoDeDuracao;
     }
 
-    public override double CalcularPrecoTotal()
+    public override decimal CalcularPrecoTotal()
     {
         return Preco;
     }

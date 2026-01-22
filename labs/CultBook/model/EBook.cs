@@ -6,13 +6,13 @@ public class EBook : Livro
     public double Tamanho { get; set; }
 
     public EBook(string isbn, string titulo, string descricao, string autor,
-                      int estoque, double preco, string categoria, double tamanho)
+                      int estoque, decimal preco, string categoria, double tamanho)
         : base(isbn, titulo, descricao, autor, estoque, preco, categoria)
     {
         Tamanho = tamanho;
     }
 
-    public override double CalcularPrecoTotal()
+    public override decimal CalcularPrecoTotal()
     {
         return Preco;
     }

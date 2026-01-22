@@ -5,13 +5,13 @@ using System.Text;
 public class ItemDePedido
 {
     private const int DEFAULT_QTDE = 1;
-    private const double DEFAULT_PRECO = 0;
+    private const decimal DEFAULT_PRECO = 0m;
 
     public int Qtde { get; set; }
-    public double Preco { get; set; }
+    public decimal Preco { get; set; }
     public Livro Livro { get; set; } 
 
-    public ItemDePedido(Livro livro, int qtde = DEFAULT_QTDE, double preco = DEFAULT_PRECO)
+    public ItemDePedido(Livro livro, int qtde = DEFAULT_QTDE, decimal preco = DEFAULT_PRECO)
     {
         Livro = livro;
         Qtde = qtde;

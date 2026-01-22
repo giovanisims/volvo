@@ -1,5 +1,6 @@
 using model;
 using controller.console;
+using System.Security.Cryptography;
 
 public class CultBook
 {
@@ -19,32 +20,37 @@ public class CultBook
     private const int INITIAL_QTDE = 1;
     private const int FIRST_PEDIDO_NUMBER = 1;
     private ServicoAutenticacao Sa = new();
+    Random r = new Random();
 
-    private Cliente[] clientes = new Cliente[]
+    private int _qtdClientes = 0;
+    private Cliente[] clientes = new Cliente[10];
+
+    public CultBook()
     {
-        new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999", 
-            new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000")),
-        new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000", 
-            new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901"))
-    };
+        clientes[_qtdClientes++] = new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
+            new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000"));
+        
+        clientes[_qtdClientes++] = new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000",
+            new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901"));
+    }
 
     Livro[] livros = new Livro[]
     {
         // Normal books (LivroFisico: needs weight and shipping fee)
-        new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90, "Fantasia", 1.2, 15.00),
-        new LivroFisico("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90, "Suspense", 0.6, 12.00),
-        new LivroFisico("978-1-56619-909-4", "1984", "Um romance distópico sobre vigilância e totalitarismo.", "George Orwell", 8, 29.90, "Ficção Científica", 0.4, 10.00),
-        new LivroFisico("978-0-452-28423-4", "Orgulho e Preconceito", "Um clássico romance sobre amor e sociedade.", "Jane Austen", 7, 24.90, "Romance", 0.5, 10.00),
-        new LivroFisico("978-0-14-044913-6", "Crime e Castigo", "Um mergulho profundo na mente de um assassino.", "Fiódor Dostoiévski", 4, 34.90, "Ficção", 0.8, 12.00),
+        new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90m, "Fantasia", 1.2, 15.00m),
+        new LivroFisico("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90m, "Suspense", 0.6, 12.00m),
+        new LivroFisico("978-1-56619-909-4", "1984", "Um romance distópico sobre vigilância e totalitarismo.", "George Orwell", 8, 29.90m, "Ficção Científica", 0.4, 10.00m),
+        new LivroFisico("978-0-452-28423-4", "Orgulho e Preconceito", "Um clássico romance sobre amor e sociedade.", "Jane Austen", 7, 24.90m, "Romance", 0.5, 10.00m),
+        new LivroFisico("978-0-14-044913-6", "Crime e Castigo", "Um mergulho profundo na mente de um assassino.", "Fiódor Dostoiévski", 4, 34.90m, "Ficção", 0.8, 12.00m),
 
         // Audio books (AudioLivro)
-        new AudioLivro("123-4-56-78901-2", "Dom Casmurro (Audio)", "Clássico de Machado de Assis.", "Machado de Assis", 5, 19.90, "Literatura", "Guilherme Briggs", 12.5),
-        new AudioLivro("321-6-54-09876-5", "Sapiens (Audio)", "Uma breve história da humanidade.", "Yuval Noah Harari", 3, 45.00, "História", "Narrador Padrão", 15.0),
+        new AudioLivro("123-4-56-78901-2", "Dom Casmurro (Audio)", "Clássico de Machado de Assis.", "Machado de Assis", 5, 19.90m, "Literatura", "Guilherme Briggs", 12.5),
+        new AudioLivro("321-6-54-09876-5", "Sapiens (Audio)", "Uma breve história da humanidade.", "Yuval Noah Harari", 3, 45.00m, "História", "Narrador Padrão", 15.0),
 
         // eBooks (EBook)
-        new EBook("978-0-13-235088-4", "Clean Code", "A Handbook of Agile Software Craftsmanship.", "Robert C. Martin", 100, 42.00, "Tecnologia", 5.5),
-        new EBook("978-0-13-449416-6", "The Clean Coder", "A Code of Conduct for Professional Programmers.", "Robert C. Martin", 50, 38.50, "Tecnologia", 3.2),
-        new EBook("978-0-201-63361-0", "Design Patterns", "Elements of Reusable Object-Oriented Software.", "Gang of Four", 20, 55.00, "Tecnologia", 12.8),
+        new EBook("978-0-13-235088-4", "Clean Code", "A Handbook of Agile Software Craftsmanship.", "Robert C. Martin", 100, 42.00m, "Tecnologia", 5.5),
+        new EBook("978-0-13-449416-6", "The Clean Coder", "A Code of Conduct for Professional Programmers.", "Robert C. Martin", 50, 38.50m, "Tecnologia", 3.2),
+        new EBook("978-0-201-63361-0", "Design Patterns", "Elements of Reusable Object-Oriented Software.", "Gang of Four", 20, 55.00m, "Tecnologia", 12.8),
     };
 
     public static void Main(string[] args)
@@ -96,7 +102,7 @@ public class CultBook
                 break;
 
             case OP_CADASTRAR:
-                Console.WriteLine("Cadastrar em construção.");
+                Cadastrar();
                 break;
 
             case OP_BUSCAR_LIVROS:
@@ -138,37 +144,80 @@ public class CultBook
 
     private void Login()
     {
-       {
-        Console.Write("Usuário: ");
-        string? loginDigitado = Console.ReadLine();
-        Console.Write("Senha: ");
-        string? senhaDigitada = Console.ReadLine();
-
-        Cliente? usuario = null;
-        foreach (var c in clientes)
         {
-            if (c.Login == loginDigitado) {
-                usuario = c;
-                break;
+            string? loginDigitado = Input("Usuário: ");
+            string? senhaDigitada = Input("Senha: ");
+
+            Cliente? usuario = null;
+            foreach (var c in clientes)
+            {
+                if (c != null && c.Login == loginDigitado)
+                {
+                    usuario = c;
+                    break;
+                }
+            }
+
+            // I would never implement authentication this way but the diagram specifies
+            // that the RealizarLogin function has to return void so I had to do it like this
+            if (usuario != null)
+            {
+                _logado = usuario.ValidarSenha(senhaDigitada ?? "");
+
+                Sa.RealizarLogin(usuario, senhaDigitada ?? "");
+            }
+            else
+            {
+                Console.WriteLine("Usuário não encontrado.");
+                _logado = false;
             }
         }
-        
-        // I would never implement authentication this way but the diagram specifies
-        // that the RealizarLogin function has to return void so I had to do it like this
-        if (usuario != null)
+    }
+
+
+    public void Cadastrar()
+    {
+        // Actual client info
+        string? nome = Input("Nome: ");
+        string? login = Input("Login: ");
+        string? senha = Input("Senha: ");
+        // password needs to be 8 digits with numbers with a letter an a symbol
+        if (string.IsNullOrWhiteSpace(senha))
         {
-            _logado = usuario.ValidarSenha(senhaDigitada ?? "");
-            
-            Sa.RealizarLogin(usuario, senhaDigitada ?? "");
+            // I know this is far from teh best implementation for a password generator but it's just for testing purposes
+            senha = r.Next(100000, 999999).ToString();
+            // ASCII capital alphabet starts at 65 
+            senha += (char)r.Next(65, 91);
+            senha += (char)r.Next(33, 48); // Some random symbols
+
+            Console.WriteLine($"Senha gerada automaticamente: {senha}");
+
+        }
+        string? email = Input("Email: ");
+        string? fone = Input("Telefone: ");
+
+        // Address info that the client class needs on creation
+        string rua = Input("Rua: ") ?? "";
+        int num = int.Parse(Input("Número: "));
+        string comp = Input("Complemento: ") ?? "";
+        string bairro = Input("Bairro: ") ?? "";
+        string cidade = Input("Cidade: ") ?? "";
+        string estado = Input("Estado: ") ?? "";
+        string cep = Input("CEP: ") ?? "";
+
+        Endereco endereco = new Endereco(rua, num, comp, bairro, cidade, estado, cep);
+        Cliente cliente = new Cliente(nome ?? "", login ?? "", senha ?? "", email ?? "", fone ?? "", endereco);
+
+        if (_qtdClientes < clientes.Length)
+        {
+            clientes[_qtdClientes++] = cliente;
+            Console.WriteLine("\nUsuário cadastrado com sucesso!");
         }
         else
         {
-            Console.WriteLine("Usuário não encontrado.");
-            _logado = false;
+            Console.WriteLine("\nErro: Limite de usuários atingido.");
         }
     }
-    }
-
     public void BuscarLivros()
     {
         for (int i = 0; i < livros.Length; i++)
@@ -184,8 +233,7 @@ public class CultBook
     {
         // Lê o livro escolhido do teclado
         Console.WriteLine("=== Inserir Livro no Carrinho ===");
-        Console.Write("Digite o ISBN do livro para compra: ");
-        String? isbn = Console.ReadLine();
+        string? isbn = Input("Digite o ISBN do livro para compra: ");
 
         // Busca livro selecionado
         Livro? aux = null;
@@ -231,4 +279,12 @@ public class CultBook
             Console.WriteLine("Carrinho vazio.");
         }
     }
+
+    // Helper methods are really cool, not sure where you are supposed to place thm tho
+    private string? Input(string prompt)
+    {
+        Console.Write(prompt);
+        return Console.ReadLine();
+    }
 }
+

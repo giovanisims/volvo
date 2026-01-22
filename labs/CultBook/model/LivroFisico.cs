@@ -4,18 +4,18 @@ public class LivroFisico : Livro
 {
 
     public double Peso { get; set; }
-    public double ValorFrete { get; set; }
+    public decimal ValorFrete { get; set; }
 
     public LivroFisico(string isbn, string titulo, string descricao, string autor,
-                      int estoque, double preco, string categoria, 
-                      double peso, double valorFrete) 
+                      int estoque, decimal preco, string categoria, 
+                      double peso, decimal valorFrete) 
         : base(isbn, titulo, descricao, autor, estoque, preco, categoria)
     {
         Peso = peso;
         ValorFrete = valorFrete;
     }
 
-    public override double CalcularPrecoTotal()
+    public override decimal CalcularPrecoTotal()
     {
         return Preco + ValorFrete;
     }

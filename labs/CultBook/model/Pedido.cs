@@ -6,7 +6,7 @@ public class Pedido
     public int Numero { get; set; }
     public string DataEmissao { get; set; }
     public string FormaPagamento { get; set; }
-    public double ValorTotal { get; set; }
+    public decimal ValorTotal { get; set; }
     public string Situacao { get; set; }
 
     public Cliente? Cliente { get; set; }
@@ -26,7 +26,7 @@ public class Pedido
 
         Itens = new ItemDePedido[MAX_ITENS];
         _qtdItens = 0;
-        ValorTotal = 0;
+        ValorTotal = 0m;
 
         InserirItem(item);
     }
