@@ -1,0 +1,23 @@
+=== Ajuda CultBook ===
+
+Bem-vindo ao CultBook! Aqui estão as instruções básicas de uso:
+
+1. Login/Cadastro:
+   - Para realizar compras, você precisa estar logado.
+   - Utilize a opção 1 para login ou 2 para cadastrar um novo usuário.
+
+2. Navegação de Livros:
+   - Use a opção 3 para listar todos os livros disponíveis (Físicos, E-Books e AudioLivros).
+   - O preço total de livros físicos inclui o valor do frete.
+
+3. Carrinho de Compras:
+   - Para adicionar um livro, escolha a opção 4 e informe o ISBN do livro desejado.
+   - Você pode visualizar seu carrinho atual usando a opção 6.
+
+4. Configurações:
+   - A região e o idioma podem ser alterados na opção 8.
+   - O horário exibido no menu principal se ajusta conforme a região selecionada.
+
+5. Finalização:
+   - Para encerrar o programa com segurança, utilize a opção 10 (Sair).
+======================

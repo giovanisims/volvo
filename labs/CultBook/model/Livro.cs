@@ -33,7 +33,7 @@ public abstract class Livro
             Descricao: {Descricao}
             Autor: {Autor}
             Estoque: {Estoque}
-            Preco: {Preco}
+            Preco: {Preco.ToString("C", new System.Globalization.CultureInfo("pt-BR"))}
             Categoria: {Categoria}
             """;
     }

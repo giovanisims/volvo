@@ -25,7 +25,7 @@ public class LivroFisico : Livro
         return base.ToString() + $"""
 
             Peso: {Peso} Kg
-            Frete: {ValorFrete} reais
+            Frete: {ValorFrete.ToString("C", new System.Globalization.CultureInfo("pt-BR"))} reais
             """;
     }
 }

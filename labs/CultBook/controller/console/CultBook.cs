@@ -1,12 +1,14 @@
 using model;
 using controller.console;
-using System.Security.Cryptography;
+using System.Globalization;
 
 public class CultBook
 {
     private bool _logado = false;
     private bool _executando = true;
-
+    private string _regiao = "pt-BR";
+    private Configurador _configurador;
+    private Ajuda _ajuda;
     private Pedido? pedido;
 
     private const int OP_LOGIN = 1;
@@ -16,7 +18,9 @@ public class CultBook
     private const int OP_REMOVER_CARRINHO = 5;
     private const int OP_VER_CARRINHO = 6;
     private const int OP_COMPRA = 7;
-    private const int OP_SAIR = 8;
+    private const int OP_MUDAR_REGIAO = 8;
+    private const int OP_AJUDA = 9;
+    private const int OP_SAIR = 10;
     private const int INITIAL_QTDE = 1;
     private const int FIRST_PEDIDO_NUMBER = 1;
     private ServicoAutenticacao Sa = new();
@@ -27,6 +31,10 @@ public class CultBook
 
     public CultBook()
     {
+        _configurador = new Configurador();
+        _ajuda = new Ajuda(_configurador.ArquivoAjuda);
+        _regiao = _configurador.Idioma;
+
         clientes[_qtdClientes++] = new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
             new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000"));
         
@@ -74,6 +82,8 @@ public class CultBook
         Console.Write($"""
 
             =========== CultBook ===========
+            Horário: {ObterHoraFormatada()}
+            Região: {_regiao}
             {OP_LOGIN}) Login
             {OP_CADASTRAR}) Cadastrar
             {OP_BUSCAR_LIVROS}) Buscar livros
@@ -81,6 +91,8 @@ public class CultBook
             {OP_REMOVER_CARRINHO}) Remover livro do carrinho
             {OP_VER_CARRINHO}) Ver carrinho
             {(_logado ? $"{OP_COMPRA}) Efetuar compra" : $"{OP_COMPRA}) Efetuar compra (desabilitado - faça login)")}
+            {OP_MUDAR_REGIAO}) Mudar Região
+            {OP_AJUDA}) Ajuda
             {OP_SAIR}) Sair
             Escolha uma opção: 
             """);
@@ -89,6 +101,44 @@ public class CultBook
     private int LerOpcao()
     {
         return Convert.ToInt32(Console.ReadLine());
+    }
+
+    private string ObterHoraFormatada()
+    {
+        // I wasnt sure if I was just supposed to change the formatting of the time based on region 24h --> 12h 
+        // Or if I was supposed to actually change the timezone according to the region choice
+        // I opted for the latter
+        string timezoneId = _regiao switch
+        {
+            "pt-BR" => "America/Sao_Paulo",
+            "fr-FR" => "Asia/China",
+            "en-US" => "America/New_York",
+            _ => "UTC"
+        };
+
+            TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
+            DateTime localTime = TimeZoneInfo.ConvertTime(DateTime.UtcNow, tz);
+            return localTime.ToString("T", new CultureInfo(_regiao));
+
+    }
+    
+    private void MudarRegiao()
+    {
+        Console.WriteLine("""
+        Escolha sua região:
+        1) Brasil (PT-BR)
+        2) China (ZH-CN)
+        3) EUA (EN-US)
+        """);
+        int op = LerOpcao();
+        _regiao = op switch
+        {
+            1 => "pt-BR",
+            2 => "zh-CN",
+            3 => "en-US",
+            _ => "pt-BR"
+        };
+        Console.WriteLine($"Região alterada para: {_regiao}");
     }
 
     private void ProcessarOpcao(int opcao)
@@ -130,6 +180,14 @@ public class CultBook
                 {
                     Console.WriteLine("Efetuar compra em construção.");
                 }
+                break;
+
+            case OP_MUDAR_REGIAO:
+                MudarRegiao();
+                break;
+
+            case OP_AJUDA:
+                ExibirAjuda();
                 break;
 
             case OP_SAIR:
@@ -285,6 +343,13 @@ public class CultBook
     {
         Console.Write(prompt);
         return Console.ReadLine();
+    }
+
+    private void ExibirAjuda()
+    {
+        Console.WriteLine("\n=== AJUDA ===");
+        Console.WriteLine(_ajuda.GetTexto());
+        Console.WriteLine("=============\n");
     }
 }
 
