@@ -9,13 +9,17 @@ public class Ajuda
     public Ajuda(string arquivo)
     {
         string path = Path.Combine("config", arquivo);
-        if (File.Exists(path))
+        try
         {
             _texto = File.ReadAllText(path);
         }
-        else
+        catch (FileNotFoundException)
         {
-            _texto = "Arquivo de ajuda não encontrado.";
+            _texto = "Arquivo de ajuda não encontrado";
+        }
+        catch (Exception ex)
+        {
+             _texto = $"Erro ao carregar ajuda";
         }
     }
 

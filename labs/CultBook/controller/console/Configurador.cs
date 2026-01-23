@@ -9,29 +9,34 @@ public class Configurador
     public string Regiao { get; set; }
     public string Idioma { get; set; }
     public string ArquivoAjuda { get; set; }
+    string path = "config/config.json";
 
     public Configurador()
     {
         try 
         {
-            string path = "config/config.json";
-            if (File.Exists(path))
+            string json = File.ReadAllText(path);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var config = JsonSerializer.Deserialize<Configurador>(json, options);
+            
+            if (config != null)
             {
-                string json = File.ReadAllText(path);
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var config = JsonSerializer.Deserialize<Configurador>(json, options);
-                
-                if (config != null)
-                {
-                    Regiao = config.Regiao;
-                    Idioma = config.Idioma;
-                    ArquivoAjuda = config.ArquivoAjuda;
-                }
+                Regiao = config.Regiao;
+                Idioma = config.Idioma;
+                ArquivoAjuda = config.ArquivoAjuda;
             }
+        }
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine($"Arquivo de configuração não encontrado");
+        }
+        catch (JsonException ex)
+        {
+            Console.WriteLine($"Erro ao ler o arquivo de configuração");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro ao carregar configurações: {ex.Message}");
+            Console.WriteLine($"Erro desconhecido ao carregar configurações");
         }
     }
 

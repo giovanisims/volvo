@@ -20,4 +20,5 @@ Bem-vindo ao CultBook! Aqui estão as instruções básicas de uso:
 
 5. Finalização:
    - Para encerrar o programa com segurança, utilize a opção 10 (Sair).
+
 ======================

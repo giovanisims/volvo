@@ -289,41 +289,48 @@ public class CultBook
 
     public void InserirLivro()
     {
-        // Lê o livro escolhido do teclado
-        Console.WriteLine("=== Inserir Livro no Carrinho ===");
-        string? isbn = Input("Digite o ISBN do livro para compra: ");
-
-        // Busca livro selecionado
-        Livro? aux = null;
-        for (int i = 0; i < livros.Length; i++)
+        try
         {
-            if (livros[i] != null && livros[i].Isbn.Equals(isbn))
+            // Lê o livro escolhido do teclado
+            Console.WriteLine("=== Inserir Livro no Carrinho ===");
+            string? isbn = Input("Digite o ISBN do livro para compra: ");
+
+            // Busca livro selecionado
+            Livro? aux = null;
+            for (int i = 0; i < livros.Length; i++)
             {
-                aux = livros[i];
-                break;
+                if (livros[i] != null && livros[i].Isbn.Equals(isbn))
+                {
+                    aux = livros[i];
+                    break;
+                }
             }
-        }
 
-        // Se não existir, interrompe
-        if (aux == null)
+            // Se não existir, lança exceção
+            if (aux == null)
+            {
+                 throw new LivroNaoEncontradoException($"O livro com ISBN {isbn} não foi encontrado no catálogo.");
+            }
+
+            // Cria item
+            ItemDePedido item = new ItemDePedido(aux, INITIAL_QTDE, aux.Preco);
+
+            // Cria pedido se não existir
+            if (pedido == null)
+            {
+                pedido = new Pedido(FIRST_PEDIDO_NUMBER, "2024-01-01", "Cartão de Crédito", "Em Processamento", item);
+            }
+            else
+            {
+                pedido.InserirItem(item);
+            }
+
+            Console.WriteLine($"Livro adicionado ao carrinho com sucesso!");
+        }
+        catch (LivroNaoEncontradoException ex)
         {
-            return;
+            Console.WriteLine($"{ex.Message}");
         }
-
-        // Cria item
-        ItemDePedido item = new ItemDePedido(aux, INITIAL_QTDE, aux.Preco);
-
-        // Cria pedido se não existir
-        if (pedido == null)
-        {
-            pedido = new Pedido(FIRST_PEDIDO_NUMBER, "2024-01-01", "Cartão de Crédito", "Em Processamento", item);
-        }
-        else
-        {
-            pedido.InserirItem(item);
-        }
-
-        Console.WriteLine($"Livro adicionado ao carrinho com sucesso!");
     }
 
     public void VerCarrinho()
@@ -353,3 +360,11 @@ public class CultBook
     }
 }
 
+public class LivroNaoEncontradoException : Exception
+{
+    public LivroNaoEncontradoException() { }
+    
+    public LivroNaoEncontradoException(string message) : base(message) { }
+    
+    public LivroNaoEncontradoException(string message, Exception inner) : base(message, inner) { }
+}
