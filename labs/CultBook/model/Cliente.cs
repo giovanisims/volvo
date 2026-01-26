@@ -9,14 +9,8 @@ public class Cliente : IAutenticavel
     public string Email { get; set; }
     public string Fone { get; set; }
 
-    public Endereco[] Enderecos { get; set; }
-    public Pedido[] Pedidos { get; set; }
-
-    private const int MAX_ENDERECOS = 10;
-    private const int MAX_PEDIDOS = 10;
-
-    private int _qtdEnderecos;
-    private int _qtdPedidos;
+    public List<Endereco> Enderecos { get; set; }
+    public List<Pedido> Pedidos { get; set; }
 
     public Cliente(string nome, string login, string senha, string email, string fone, Endereco endereco)
     {
@@ -26,11 +20,8 @@ public class Cliente : IAutenticavel
         Email = email;
         Fone = fone;
 
-        Enderecos = new Endereco[MAX_ENDERECOS];
-        Pedidos = new Pedido[MAX_PEDIDOS];
-
-        _qtdEnderecos = 0;
-        _qtdPedidos = 0;
+        Enderecos = new List<Endereco>();
+        Pedidos = new List<Pedido>();
 
         InserirEndereco(endereco);
     }
@@ -46,21 +37,13 @@ public class Cliente : IAutenticavel
 
     public bool InserirPedido(Pedido pedido)
     {
-        if (_qtdPedidos >= Pedidos.Length)
-            return false;
-
-        Pedidos[_qtdPedidos] = pedido;
-        _qtdPedidos++;
+        Pedidos.Add(pedido);
         return true;
     }
 
     public bool InserirEndereco(Endereco endereco)
     {
-        if (_qtdEnderecos >= Enderecos.Length)
-            return false;
-
-        Enderecos[_qtdEnderecos] = endereco;
-        _qtdEnderecos++;
+        Enderecos.Add(endereco);
         return true;
     }
 
@@ -80,7 +63,7 @@ public class Cliente : IAutenticavel
             """);
 
         sb.AppendLine("Enderecos:");
-        for (int i = 0; i < _qtdEnderecos; i++)
+        for (int i = 0; i < Enderecos.Count; i++)
         {
             sb.AppendLine($"--- Endereco {i + 1} ---");
             // Append line also works with ToString so we just replace that aswell
@@ -88,7 +71,7 @@ public class Cliente : IAutenticavel
         }
 
         sb.AppendLine("Pedidos:");
-        for (int i = 0; i < _qtdPedidos; i++)
+        for (int i = 0; i < Pedidos.Count; i++)
         {
             sb.AppendLine($"--- Pedido {i + 1} ---");
             sb.AppendLine(Pedidos[i].ToString());

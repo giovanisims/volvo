@@ -26,8 +26,7 @@ public class CultBook
     private ServicoAutenticacao Sa = new();
     Random r = new Random();
 
-    private int _qtdClientes = 0;
-    private Cliente[] clientes = new Cliente[10];
+    private List<Cliente> clientes = new List<Cliente>();
 
     public CultBook()
     {
@@ -35,14 +34,14 @@ public class CultBook
         _ajuda = new Ajuda(_configurador.ArquivoAjuda);
         _regiao = _configurador.Idioma;
 
-        clientes[_qtdClientes++] = new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
-            new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000"));
+        clientes.Add(new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
+            new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000")));
         
-        clientes[_qtdClientes++] = new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000",
-            new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901"));
+        clientes.Add(new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000",
+            new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901")));
     }
 
-    Livro[] livros = new Livro[]
+    List<Livro> livros = new List<Livro>
     {
         // Normal books (LivroFisico: needs weight and shipping fee)
         new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90m, "Fantasia", 1.2, 15.00m),
@@ -266,24 +265,14 @@ public class CultBook
         Endereco endereco = new Endereco(rua, num, comp, bairro, cidade, estado, cep);
         Cliente cliente = new Cliente(nome ?? "", login ?? "", senha ?? "", email ?? "", fone ?? "", endereco);
 
-        if (_qtdClientes < clientes.Length)
-        {
-            clientes[_qtdClientes++] = cliente;
-            Console.WriteLine("\nUsuário cadastrado com sucesso!");
-        }
-        else
-        {
-            Console.WriteLine("\nErro: Limite de usuários atingido.");
-        }
+        clientes.Add(cliente);
+        Console.WriteLine("\nUsuário cadastrado com sucesso!");
     }
     public void BuscarLivros()
     {
-        for (int i = 0; i < livros.Length; i++)
+        foreach (var livro in livros)
         {
-            if (livros[i] != null)
-            {
-                Console.WriteLine(livros[i].ToString());
-            }
+            Console.WriteLine(livro.ToString());
         }
     }
 
@@ -293,15 +282,15 @@ public class CultBook
         {
             // Lê o livro escolhido do teclado
             Console.WriteLine("=== Inserir Livro no Carrinho ===");
-            string? isbn = Input("Digite o ISBN do livro para compra: ");
+            string? isbn = Input("Digite o ISBN do livro para compra: ").Trim();
 
             // Busca livro selecionado
             Livro? aux = null;
-            for (int i = 0; i < livros.Length; i++)
+            foreach (var livro in livros)
             {
-                if (livros[i] != null && livros[i].Isbn.Equals(isbn))
+                if (livro.Isbn.Equals(isbn))
                 {
-                    aux = livros[i];
+                    aux = livro;
                     break;
                 }
             }

@@ -12,9 +12,7 @@ public class Pedido
     public Cliente? Cliente { get; set; }
     public Endereco? EnderecoEntrega { get; set; }
 
-    public ItemDePedido[] Itens { get; set; }
-    private const int MAX_ITENS = 10;
-    private int _qtdItens;
+    public List<ItemDePedido> Itens { get; set; }
 
     public Pedido(int numero, string dataEmissao, string formaPagamento,
                   string situacao, ItemDePedido item)
@@ -24,8 +22,8 @@ public class Pedido
         FormaPagamento = formaPagamento;
         Situacao = situacao;
 
-        Itens = new ItemDePedido[MAX_ITENS];
-        _qtdItens = 0;
+        Itens = new List<ItemDePedido>();
+        Itens.Add(item);
         ValorTotal = 0m;
 
         InserirItem(item);
@@ -33,12 +31,7 @@ public class Pedido
 
     public bool InserirItem(ItemDePedido item)
     {
-        // array fixo: insere se houver espaço
-        if (_qtdItens >= Itens.Length)
-            return false;
-
-        Itens[_qtdItens] = item;
-        _qtdItens++;
+        Itens.Add(item);
 
         ValorTotal += item.Preco * item.Qtde;
         return true;
@@ -70,12 +63,11 @@ public class Pedido
         }
 
         sb.AppendLine("Itens:");
-        for (int i = 0; i < _qtdItens; i++)
+        for (int i = 0; i < Itens.Count; i++)
         {
             sb.AppendLine($"--- Item {i + 1} ---");
             sb.AppendLine(Itens[i].ToString());
         }
-
         return sb.ToString();
     }
 }
