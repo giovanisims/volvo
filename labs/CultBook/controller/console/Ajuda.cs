@@ -17,7 +17,7 @@ public class Ajuda
         {
             _texto = "Arquivo de ajuda não encontrado";
         }
-        catch (Exception ex)
+        catch (Exception)
         {
              _texto = $"Erro ao carregar ajuda";
         }

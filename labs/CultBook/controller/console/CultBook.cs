@@ -227,7 +227,7 @@ public class CultBook
         Valor Final: {(pedido.ValorTotal + totalFrete):C}
         """);
 
-        string? confirma = Input("\nDeseja efetuar a compra? (S/N): ").ToLower().Trim();
+        string? confirma = Input("\nDeseja efetuar a compra? (S/N): ")?.ToLower().Trim();
 
         if (confirma != "s" && confirma != "sim")
         {
@@ -299,7 +299,7 @@ public class CultBook
 
         // Address info that the client class needs on creation
         string rua = Input("Rua: ") ?? "";
-        int num = int.Parse(Input("Número: "));
+        int.TryParse(Input("Número: "), out int num);
         string comp = Input("Complemento: ") ?? "";
         string bairro = Input("Bairro: ") ?? "";
         string cidade = Input("Cidade: ") ?? "";
@@ -326,13 +326,13 @@ public class CultBook
         {
             // Lê o livro escolhido do teclado
             Console.WriteLine("=== Inserir Livro no Carrinho ===");
-            string? isbn = Input("Digite o ISBN do livro para compra: ").Trim();
+            string? isbn = Input("Digite o ISBN do livro para compra: ")?.Trim();
 
             // Busca livro selecionado
             Livro? aux = null;
             foreach (var livro in livros)
             {
-                if (livro.Isbn.Equals(isbn))
+                if (livro != null && livro.Isbn.Equals(isbn))
                 {
                     aux = livro;
                     break;
@@ -373,7 +373,7 @@ public class CultBook
             try
             {
                 Console.WriteLine("=== Remover Livro no Carrinho ===");
-                string? isbn = Input("Digite o ISBN do livro para removed do carrinho: ").Trim();
+                string? isbn = Input("Digite o ISBN do livro para removed do carrinho: ")?.Trim();
 
                 ItemDePedido? aux = null;
 
@@ -396,9 +396,12 @@ public class CultBook
                 }
 
 
-                pedido.Itens.Remove(aux);
+                pedido?.Itens.Remove(aux);
 
-                pedido.ValorTotal -= aux.Preco * aux.Qtde;
+                if (pedido != null)
+                {
+                    pedido.ValorTotal -= aux.Preco * aux.Qtde;
+                }
 
                 Console.WriteLine($"Livro removido do carrinho com sucesso!");
 

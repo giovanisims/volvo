@@ -6,9 +6,9 @@ using System.Text.Json.Serialization;
 
 public class Configurador
 {
-    public string Regiao { get; set; }
-    public string Idioma { get; set; }
-    public string ArquivoAjuda { get; set; }
+    public string Regiao { get; set; } = string.Empty;
+    public string Idioma { get; set; } = string.Empty;
+    public string ArquivoAjuda { get; set; } = string.Empty;
     string path = "config/config.json";
 
     public Configurador()
@@ -26,15 +26,15 @@ public class Configurador
                 ArquivoAjuda = config.ArquivoAjuda;
             }
         }
-        catch (FileNotFoundException ex)
+        catch (FileNotFoundException)
         {
             Console.WriteLine($"Arquivo de configuração não encontrado");
         }
-        catch (JsonException ex)
+        catch (JsonException)
         {
             Console.WriteLine($"Erro ao ler o arquivo de configuração");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Console.WriteLine($"Erro desconhecido ao carregar configurações");
         }
