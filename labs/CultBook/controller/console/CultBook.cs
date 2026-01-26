@@ -10,7 +10,8 @@ public class CultBook
     private Configurador _configurador;
     private Ajuda _ajuda;
     private Pedido? pedido;
-
+    // This is just used for keeping the "Numero" attribute from "Pedido" synchorinzed with the interface
+    private int qtdpedido = 1;
     private const int OP_LOGIN = 1;
     private const int OP_CADASTRAR = 2;
     private const int OP_BUSCAR_LIVROS = 3;
@@ -177,7 +178,7 @@ public class CultBook
                 }
                 else
                 {
-                    Console.WriteLine("Efetuar compra em construção.");
+                    EfetuarCompra();
                 }
                 break;
 
@@ -198,6 +199,49 @@ public class CultBook
                 break;
         }
     }
+
+    public void EfetuarCompra()
+    {
+        if (pedido == null)
+        {
+            Console.WriteLine("Não há pedido para processar.");
+            return;
+        }
+
+        decimal totalFrete = 0;
+        foreach (var item in pedido.Itens)
+        {
+            // Check if the Livro is a LivroFisico to access ValorFrete
+            if (item.Livro is LivroFisico fisico)
+            {   
+                // Right now i's pointless to multiply per qtde but iy's still good logic to have
+                totalFrete += fisico.ValorFrete * item.Qtde; 
+            }
+        }
+
+        Console.WriteLine($"""
+        Resumo Pedido {qtdpedido}
+        {pedido}
+        Valor Total dos Itens: {pedido.ValorTotal:C}
+        Valor Total do Frete: {totalFrete:C}
+        Valor Final: {(pedido.ValorTotal + totalFrete):C}
+        """);
+
+        string? confirma = Input("\nDeseja efetuar a compra? (S/N): ").ToLower().Trim();
+
+        if (confirma != "s" && confirma != "sim")
+        {
+            Console.WriteLine("Compra cancelada pelo usuário.");
+            return;
+        }
+
+        Console.WriteLine("\nCompra efetuada com sucesso!");
+
+        pedido = null;
+        qtdpedido++;
+
+    }
+
 
     private void Login()
     {
@@ -331,7 +375,7 @@ public class CultBook
                 Console.WriteLine("=== Remover Livro no Carrinho ===");
                 string? isbn = Input("Digite o ISBN do livro para removed do carrinho: ").Trim();
 
-                                    ItemDePedido? aux = null;
+                ItemDePedido? aux = null;
 
 
                 if (pedido != null)

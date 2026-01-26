@@ -8,7 +8,7 @@ public class Pedido
     public string FormaPagamento { get; set; }
     public decimal ValorTotal { get; set; }
     public string Situacao { get; set; }
-
+    
     public Cliente? Cliente { get; set; }
     public Endereco? EnderecoEntrega { get; set; }
 
