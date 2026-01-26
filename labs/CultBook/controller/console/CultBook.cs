@@ -36,7 +36,7 @@ public class CultBook
 
         clientes.Add(new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
             new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000")));
-        
+
         clientes.Add(new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000",
             new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901")));
     }
@@ -115,12 +115,12 @@ public class CultBook
             _ => "UTC"
         };
 
-            TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
-            DateTime localTime = TimeZoneInfo.ConvertTime(DateTime.UtcNow, tz);
-            return localTime.ToString("T", new CultureInfo(_regiao));
+        TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
+        DateTime localTime = TimeZoneInfo.ConvertTime(DateTime.UtcNow, tz);
+        return localTime.ToString("T", new CultureInfo(_regiao));
 
     }
-    
+
     private void MudarRegiao()
     {
         Console.WriteLine("""
@@ -163,7 +163,7 @@ public class CultBook
                 break;
 
             case OP_REMOVER_CARRINHO:
-                Console.WriteLine("Remover livro do carrinho em construção.");
+                RemoverLivro();
                 break;
 
             case OP_VER_CARRINHO:
@@ -298,7 +298,7 @@ public class CultBook
             // Se não existir, lança exceção
             if (aux == null)
             {
-                 throw new LivroNaoEncontradoException($"O livro com ISBN {isbn} não foi encontrado no catálogo.");
+                throw new LivroNaoEncontradoException($"O livro com ISBN {isbn} não foi encontrado no catálogo.");
             }
 
             // Cria item
@@ -322,6 +322,51 @@ public class CultBook
         }
     }
 
+    public void RemoverLivro()
+    {
+
+        {
+            try
+            {
+                Console.WriteLine("=== Remover Livro no Carrinho ===");
+                string? isbn = Input("Digite o ISBN do livro para removed do carrinho: ").Trim();
+
+                                    ItemDePedido? aux = null;
+
+
+                if (pedido != null)
+                {
+                    foreach (var item in pedido.Itens)
+                    {
+                        if (item.Livro.Isbn.Equals(isbn))
+                        {
+                            aux = item;
+                        }
+                    }
+
+                }
+
+                if (aux == null)
+                {
+                    throw new LivroNaoEncontradoException($"O livro com ISBN {isbn} não foi encontrado no carrinho.");
+                }
+
+
+                pedido.Itens.Remove(aux);
+
+                pedido.ValorTotal -= aux.Preco * aux.Qtde;
+
+                Console.WriteLine($"Livro removido do carrinho com sucesso!");
+
+
+
+            }
+            catch (LivroNaoEncontradoException ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+        }
+    }
     public void VerCarrinho()
     {
         if (pedido != null)
@@ -352,8 +397,8 @@ public class CultBook
 public class LivroNaoEncontradoException : Exception
 {
     public LivroNaoEncontradoException() { }
-    
+
     public LivroNaoEncontradoException(string message) : base(message) { }
-    
+
     public LivroNaoEncontradoException(string message, Exception inner) : base(message, inner) { }
 }

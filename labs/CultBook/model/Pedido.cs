@@ -23,7 +23,6 @@ public class Pedido
         Situacao = situacao;
 
         Itens = new List<ItemDePedido>();
-        Itens.Add(item);
         ValorTotal = 0m;
 
         InserirItem(item);
