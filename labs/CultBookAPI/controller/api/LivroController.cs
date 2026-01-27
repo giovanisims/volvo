@@ -5,7 +5,8 @@ using service;
 namespace controller.api;
 
 // The ApiController decorator automates a bunch of necessary and useful behaviors
-[ApiController] 
+[ApiController]
+// this [Controller] will automatically assign the route based on the class name
 [Route("api/[controller]")]
 // ControllerBase is a built-in class that provides methods for a bunch of common HTTP codes,
 // and properties used for modifying incoming and outgoing traffic
@@ -52,5 +53,12 @@ public class LivroController : ControllerBase
     {
         var livro = _livroService.GetPorIsbn(isbn);
         return livro != null ? Ok(livro) : NotFound();
+    }
+
+    [HttpPost]
+    public IActionResult Adicionar([FromBody] Livro novoLivro)
+    {
+        _livroService.Adicionar(novoLivro);
+        return CreatedAtAction(nameof(BuscarPorIsbn), new { isbn = novoLivro.Isbn }, novoLivro);
     }
 }

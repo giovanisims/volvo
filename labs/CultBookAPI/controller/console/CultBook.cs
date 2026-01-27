@@ -39,31 +39,31 @@ public class CultBook
         _ajuda = new Ajuda(_configurador.ArquivoAjuda);
         _regiao = _configurador.Idioma;
 
-        clientes.Add(new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
-            new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000")));
+        // clientes.Add(new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
+        //     new Endereco("Rua XV", 123, "", "Centro", "Curitiba", "PR", "80000-000")));
 
-        clientes.Add(new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000",
-            new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901")));
+        // clientes.Add(new Cliente("Admin", "admin", "admin123", "admin@cultbook.com", "41 00000-0000",
+        //     new Endereco("Rua Imaculada", 1155, "complemento", "Prado Velho", "Curitiba", "PR", "80215-901")));
     }
 
-    List<Livro> livros = new List<Livro>
-    {
-        // Normal books (LivroFisico: needs weight and shipping fee)
-        new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90m, "Fantasia", 1.2, 15.00m),
-        new LivroFisico("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90m, "Suspense", 0.6, 12.00m),
-        new LivroFisico("978-1-56619-909-4", "1984", "Um romance distópico sobre vigilância e totalitarismo.", "George Orwell", 8, 29.90m, "Ficção Científica", 0.4, 10.00m),
-        new LivroFisico("978-0-452-28423-4", "Orgulho e Preconceito", "Um clássico romance sobre amor e sociedade.", "Jane Austen", 7, 24.90m, "Romance", 0.5, 10.00m),
-        new LivroFisico("978-0-14-044913-6", "Crime e Castigo", "Um mergulho profundo na mente de um assassino.", "Fiódor Dostoiévski", 4, 34.90m, "Ficção", 0.8, 12.00m),
+    // List<Livro> livros = new List<Livro>
+    // {
+    //     // Normal books (LivroFisico: needs weight and shipping fee)
+    //     new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90m, "Fantasia", 1.2, 15.00m),
+    //     new LivroFisico("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90m, "Suspense", 0.6, 12.00m),
+    //     new LivroFisico("978-1-56619-909-4", "1984", "Um romance distópico sobre vigilância e totalitarismo.", "George Orwell", 8, 29.90m, "Ficção Científica", 0.4, 10.00m),
+    //     new LivroFisico("978-0-452-28423-4", "Orgulho e Preconceito", "Um clássico romance sobre amor e sociedade.", "Jane Austen", 7, 24.90m, "Romance", 0.5, 10.00m),
+    //     new LivroFisico("978-0-14-044913-6", "Crime e Castigo", "Um mergulho profundo na mente de um assassino.", "Fiódor Dostoiévski", 4, 34.90m, "Ficção", 0.8, 12.00m),
 
-        // Audio books (AudioLivro)
-        new AudioLivro("123-4-56-78901-2", "Dom Casmurro (Audio)", "Clássico de Machado de Assis.", "Machado de Assis", 5, 19.90m, "Literatura", "Guilherme Briggs", 12.5),
-        new AudioLivro("321-6-54-09876-5", "Sapiens (Audio)", "Uma breve história da humanidade.", "Yuval Noah Harari", 3, 45.00m, "História", "Narrador Padrão", 15.0),
+    //     // Audio books (AudioLivro)
+    //     new AudioLivro("123-4-56-78901-2", "Dom Casmurro (Audio)", "Clássico de Machado de Assis.", "Machado de Assis", 5, 19.90m, "Literatura", "Guilherme Briggs", 12.5),
+    //     new AudioLivro("321-6-54-09876-5", "Sapiens (Audio)", "Uma breve história da humanidade.", "Yuval Noah Harari", 3, 45.00m, "História", "Narrador Padrão", 15.0),
 
-        // eBooks (EBook)
-        new EBook("978-0-13-235088-4", "Clean Code", "A Handbook of Agile Software Craftsmanship.", "Robert C. Martin", 100, 42.00m, "Tecnologia", 5.5),
-        new EBook("978-0-13-449416-6", "The Clean Coder", "A Code of Conduct for Professional Programmers.", "Robert C. Martin", 50, 38.50m, "Tecnologia", 3.2),
-        new EBook("978-0-201-63361-0", "Design Patterns", "Elements of Reusable Object-Oriented Software.", "Gang of Four", 20, 55.00m, "Tecnologia", 12.8),
-    };
+    //     // eBooks (EBook)
+    //     new EBook("978-0-13-235088-4", "Clean Code", "A Handbook of Agile Software Craftsmanship.", "Robert C. Martin", 100, 42.00m, "Tecnologia", 5.5),
+    //     new EBook("978-0-13-449416-6", "The Clean Coder", "A Code of Conduct for Professional Programmers.", "Robert C. Martin", 50, 38.50m, "Tecnologia", 3.2),
+    //     new EBook("978-0-201-63361-0", "Design Patterns", "Elements of Reusable Object-Oriented Software.", "Gang of Four", 20, 55.00m, "Tecnologia", 12.8),
+    // };
 
     private void MostrarMenu()
     {

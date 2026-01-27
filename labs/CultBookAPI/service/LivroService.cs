@@ -30,4 +30,9 @@ public class LivroService
         // could also be using LINQ instead but it would be overkill
         return _livros.Find(l => l.Isbn.Equals(isbn));
     }
+    
+    public void Adicionar(Livro novoLivro)
+    {
+        _livros.Add(novoLivro);
+    }
 }
