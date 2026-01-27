@@ -1,18 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using model;
+using model.livros;
+namespace service;
 
-namespace controller.console;
-
-// The ApiController decorator automates a bunch of necessary and useful behaviors
-[ApiController] 
-[Route("api/[controller]")]
-// ControllerBase is a built-in class that provides methods for a bunch of common HTTP codes,
-// and properties used for modifying incoming and outgoing traffic
-public class LivroController : ControllerBase
+public class LivroService
 {
     // Static isnt necessary here but it would be very important if this was actually used in prod
     // but also you wouldnt be creating this list in the controller
-    private static List<Livro> _livros = new List<Livro>
+    private readonly List<Livro> _livros = new List<Livro>
     {
         new LivroFisico("978-3-16-148410-0", "O Senhor dos Anéis", "Uma épica aventura na Terra Média.", "J.R.R. Tolkien", 10, 59.90m, "Fantasia", 0.8, 15.00m),
         new LivroFisico("978-0-7432-7356-5", "O Código Da Vinci", "Um thriller de mistério envolvendo arte e história.", "Dan Brown", 5, 39.90m, "Suspense", 0.5, 12.00m),
@@ -28,42 +21,13 @@ public class LivroController : ControllerBase
         new EBook("978-1-11-222333-4", "O Poder do Hábito", "Como os hábitos funcionam e como mudá-los.", "Charles Duhigg", 12, 29.90m, "Autoajuda", 3.2)
     };
 
-    [HttpGet]
-    // IActionResult is usedfor HTTP compatibility, it converts the return into a JSON
-    // And HTTP protocol details.
-    // You can also implement IActionResult<T> you keep the felxibility of IAction and still have type-safety
-    public IActionResult BuscarLivros()
-    {
-        // Ok is a helper method used for suceessful requests
-        // it sets the HTTP status to 200 --> Wraps the data in an OkObjectResults -->
-        // Check what format it should reply in and serializes the list
-        return Ok(_livros);
-    }
+    // This is just another syntax to do a one line return 
+    public List<Livro> GetTodos() => _livros;
 
-    // The user who made the request gets a clean JSON like 
-    /*
-    [
-    { "foo": "bar", "bar": "foo", ... },
-    { "foo": "bar", "bar": "foo", ... }
-    ]
-
-    instead of getting the whole response like: 
-    {
-    "statusCode": 200,
-    "value": [ foo, bar, ... ],
-    "contentType": null
-    }
-    Unless you have a 400 error and then it send the full problem report
-    */
-
-    // This is a route parameter not a query parameter
-    // we are using it to create the pattern for REST URls
-    [HttpGet("{isbn}")] 
-    public IActionResult BuscarPorIsbn(string isbn)
+    public Livro? GetPorIsbn(string isbn)
     {
         // Find is a built in function of collections to run a foreach and a equals check
         // could also be using LINQ instead but it would be overkill
-        var livro = _livros.Find(l => l.Isbn.Equals(isbn));
-        return livro != null ? Ok(livro) : NotFound();
+        return _livros.Find(l => l.Isbn.Equals(isbn));
     }
 }

@@ -1,5 +1,9 @@
-using model;
-using controller.console;
+namespace controller.console;
+
+using model.clientes;
+using model.livros;
+using model.pedidos;
+using service;
 using System.Globalization;
 
 public class CultBook

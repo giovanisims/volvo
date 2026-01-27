@@ -1,4 +1,4 @@
-namespace model;
+namespace model.clientes;
 
 public interface IAutenticavel
 {

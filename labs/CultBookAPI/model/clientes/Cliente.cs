@@ -1,5 +1,6 @@
-namespace model;
+namespace model.clientes;
 using System.Text; // Used by string builder
+using model.pedidos;
 
 public class Cliente : IAutenticavel
 {

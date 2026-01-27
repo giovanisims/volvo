@@ -1,6 +1,7 @@
-namespace model;
-using System.Text;
+namespace model.pedidos;
 
+using System.Text;
+using model.livros;
 
 public class ItemDePedido
 {

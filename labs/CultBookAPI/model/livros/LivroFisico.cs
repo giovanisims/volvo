@@ -1,4 +1,4 @@
-namespace model;
+namespace model.livros;
 
 public class LivroFisico : Livro
 {

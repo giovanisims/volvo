@@ -1,4 +1,4 @@
-namespace controller.console;
+namespace service;
 
 using System.IO;
 using System.Text.Json;

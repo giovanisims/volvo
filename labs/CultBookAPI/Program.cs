@@ -1,8 +1,13 @@
+using service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<LivroService>();
+
 
 var app = builder.Build();
 

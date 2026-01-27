@@ -1,6 +1,6 @@
-namespace controller.console;
+namespace service;
 
-using model;
+using model.clientes;
 
 public class ServicoAutenticacao
 {

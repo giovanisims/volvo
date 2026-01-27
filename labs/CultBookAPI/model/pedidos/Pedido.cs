@@ -1,5 +1,8 @@
-namespace model;
+namespace model.pedidos;
+
 using System.Text;
+using model.clientes;
+using model.pedidos;
 
 public class Pedido
 {
