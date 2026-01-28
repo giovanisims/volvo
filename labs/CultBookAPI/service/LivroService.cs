@@ -22,7 +22,9 @@ public class LivroService
         new EBook("978-1-11-222333-4", "O Poder do Hábito", "Como os hábitos funcionam e como mudá-los.", "Charles Duhigg", 12, 29.90m, "Autoajuda", 3.2)
     };
 
-    // This is just another syntax to do a one line return 
+    // Select iterates through each Livro object in the _livros list and check them agains the switch expression 
+    // to figure out what to add-on depending on the type, and then I'm not 100% sure why you need the toList
+    // but I think it's because the Select function doesnt return a normal List
     public List<LivroDTO?> GetTodos() => _livros.Select(MapParaDto).ToList();
 
     public LivroDTO? GetPorIsbn(string isbn)
