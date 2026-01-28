@@ -1,4 +1,5 @@
 using model.livros;
+using model.dto;
 namespace service;
 
 public class LivroService
@@ -22,17 +23,75 @@ public class LivroService
     };
 
     // This is just another syntax to do a one line return 
-    public List<Livro> GetTodos() => _livros;
+    public List<LivroDTO?> GetTodos() => _livros.Select(MapParaDto).ToList();
 
-    public Livro? GetPorIsbn(string isbn)
+    public LivroDTO? GetPorIsbn(string isbn)
     {
         // Find is a built in function of collections to run a foreach and a equals check
         // could also be using LINQ instead but it would be overkill
-        return _livros.Find(l => l.Isbn.Equals(isbn));
+        var livro = _livros.Find(l => l.Isbn.Equals(isbn));
+        return livro != null ? MapParaDto(livro) : null;    
     }
+
+    /*
+    We need this help method otherwse all the GET requests are going to be based
+    on the abstract book class which is of course missing the properties added in
+    the daughter classee i.e:
     
-    public void Adicionar(Livro novoLivro)
     {
-        _livros.Add(novoLivro);
+    "isbn": "978-0-7432-7356-5",
+    "titulo": "O Código Da Vinci",
+    "descricao": "Um thriller de mistério envolvendo arte e história.",
+    "autor": "Dan Brown",
+    "estoque": 5,
+    "preco": 39.9,
+    "categoria": "Suspense" 
+    }, 
+
+    This book belongs to the "LivroFisico" class however because the JSON serializer
+    Was defined with only the Livro class it's missing both "Peso" and "ValorFrete"
+    */ 
+    private LivroDTO MapParaDto(Livro livro) => livro switch
+    {
+        LivroFisico f => new LivroDTO 
+        { 
+            Tipo = "fisico", Isbn = f.Isbn, Titulo = f.Titulo, Descricao = f.Descricao, 
+            Autor = f.Autor, Estoque = f.Estoque, Preco = f.Preco, Categoria = f.Categoria,
+            Peso = f.Peso, ValorFrete = f.ValorFrete 
+        },
+        AudioLivro a => new LivroDTO 
+        { 
+            Tipo = "audio", Isbn = a.Isbn, Titulo = a.Titulo, Descricao = a.Descricao, 
+            Autor = a.Autor, Estoque = a.Estoque, Preco = a.Preco, Categoria = a.Categoria,
+            Narrador = a.Narrador, TempoDeDuracao = a.TempoDeDuracao 
+        },
+        EBook e => new LivroDTO 
+        { 
+            Tipo = "ebook", Isbn = e.Isbn, Titulo = e.Titulo, Descricao = e.Descricao, 
+            Autor = e.Autor, Estoque = e.Estoque, Preco = e.Preco, Categoria = e.Categoria,
+            Tamanho = e.Tamanho 
+        },
+        _ => throw new ArgumentException("Tipo de livro desconhecido")
+    };
+
+    
+    public Livro? Adicionar(LivroDTO dto)
+    {
+        // switch expressions are really cool
+        Livro? novoLivro = dto.Tipo.ToLower() switch
+        {
+            "fisico" => new LivroFisico(dto.Isbn, dto.Titulo, dto.Descricao, dto.Autor, dto.Estoque, dto.Preco, dto.Categoria, dto.Peso ?? 0, dto.ValorFrete ?? 0),
+            "audio" => new AudioLivro(dto.Isbn, dto.Titulo, dto.Descricao, dto.Autor, dto.Estoque, dto.Preco, dto.Categoria, dto.Narrador ?? "", dto.TempoDeDuracao ?? 0),
+            "ebook" => new EBook(dto.Isbn, dto.Titulo, dto.Descricao, dto.Autor, dto.Estoque, dto.Preco, dto.Categoria, dto.Tamanho ?? 0),
+            _ => null
+        };
+
+        if (novoLivro != null)
+        {
+            _livros.Add(novoLivro);
+        }
+
+        return novoLivro;
     }
 }
+

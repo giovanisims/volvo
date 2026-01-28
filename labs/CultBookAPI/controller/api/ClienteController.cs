@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using model.clientes;
 using service;
-using dto;
+using model.dto;
 
 namespace controller.api;
 
@@ -17,11 +17,15 @@ public class ClienteController : ControllerBase
         _clienteService = clientService; 
         _autenticacaoService = authService;
     }
+
+    // For testing purposes only
+    [HttpGet]
+    public IActionResult BuscarClientes() => Ok(_clienteService.GetTodos());
     
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginDTO data)
     {
-        var usuario = _clientService.GetPorLogin(data.Login);
+        var usuario = _clienteService.GetPorLogin(data.Login);
 
         if (usuario == null) 
             return NotFound(new { message = "Usuário não existe" });

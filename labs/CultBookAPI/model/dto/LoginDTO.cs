@@ -1,4 +1,4 @@
-namespace dto;
+namespace model.dto;
 
 public class LoginDTO
 {

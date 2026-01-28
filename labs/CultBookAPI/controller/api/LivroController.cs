@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using model.livros;
 using service;
+using model.dto;
 
 namespace controller.api;
 
@@ -56,7 +57,7 @@ public class LivroController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Adicionar([FromBody] Livro novoLivro)
+    public IActionResult Adicionar([FromBody] LivroDTO novoLivro)
     {
         _livroService.Adicionar(novoLivro);
         return CreatedAtAction(nameof(BuscarPorIsbn), new { isbn = novoLivro.Isbn }, novoLivro);

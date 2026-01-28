@@ -3,6 +3,7 @@ namespace service;
 
 public class ClienteService
 {
+    private readonly Random r = new Random();
     private readonly List<Cliente> _cliente = new List<Cliente>
     {
     new Cliente("Giovani Sims", "giovani", "123456", "giovani@email.com", "41 99999-9999",
@@ -34,4 +35,6 @@ public class ClienteService
     {
         _cliente.Add(cliente);
     }
+
+    public List<Cliente> GetTodos() => _cliente;
 }
