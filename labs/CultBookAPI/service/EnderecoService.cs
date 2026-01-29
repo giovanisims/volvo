@@ -18,5 +18,19 @@ public class EnderecoService
             .ToList();
     }
 
+    public bool Adicionar(EnderecoDTO dto)
+    {
+
+        var cliente = _clienteService.GetPorLogin(dto.ClienteLogin);
+        if (cliente == null) return false; 
+
+        var endereco = new Endereco(
+        dto.Rua, dto.Numero, dto.Complemento, 
+        dto.Bairro, dto.Cidade, dto.Estado, dto.Cep
+        );
+
+        cliente.InserirEndereco(endereco);
+        return true;
+    }
 
 }

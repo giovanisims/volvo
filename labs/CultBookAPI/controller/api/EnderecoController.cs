@@ -18,4 +18,14 @@ public class EnderecoController : ControllerBase
 
     [HttpGet]
     public IActionResult BuscarEndderecos() => Ok(_enderecoService.GetTodos());
+
+    [HttpPost]
+    public IActionResult Adicionar([FromBody] EnderecoDTO dto)
+    {
+        if (!_enderecoService.Adicionar(dto))
+        {
+            return NotFound(new { message = "Cliente não encontrado" });
+        }
+        return Created("", new { message = "Endereço adicionado com sucesso!" });
+    }
 }
