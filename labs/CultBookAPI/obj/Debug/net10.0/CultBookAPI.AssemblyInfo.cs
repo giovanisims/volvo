@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CultBookAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e2e159da1c529dc264a39ac2734c194f9f4fd52")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d4301dca72f2b0dbffeb661b7d50eb87e7eb078")]
 [assembly: System.Reflection.AssemblyProductAttribute("CultBookAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CultBookAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

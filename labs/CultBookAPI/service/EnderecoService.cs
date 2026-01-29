@@ -11,12 +11,7 @@ public class EnderecoService
     {
         _clienteService = clienteService;
     }
-    public List<Endereco> GetTodos()
-    {
-        return _clienteService.GetTodos()
-            .SelectMany(c => c.Enderecos)
-            .ToList();
-    }
+    public List<Endereco> GetTodos() => _clienteService.GetTodos().SelectMany(c => c.Enderecos).ToList();
 
     public bool Adicionar(EnderecoDTO dto)
     {

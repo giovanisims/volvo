@@ -27,11 +27,11 @@ public class LivroService
     // but I think it's because the Select function doesnt return a normal List
     public List<LivroDTO?> GetTodos() => _livros.Select(MapParaDto).ToList();
 
+    public Livro? GetModelPorIsbn(string isbn) => _livros.Find(l => l.Isbn == isbn);
+
     public LivroDTO? GetPorIsbn(string isbn)
     {
-        // Find is a built in function of collections to run a foreach and a equals check
-        // could also be using LINQ instead but it would be overkill
-        var livro = _livros.Find(l => l.Isbn.Equals(isbn));
+        var livro = GetModelPorIsbn(isbn);
         return livro != null ? MapParaDto(livro) : null;    
     }
 

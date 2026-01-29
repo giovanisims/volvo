@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<LivroService>();
 builder.Services.AddSingleton<ClienteService>();
 builder.Services.AddSingleton<EnderecoService>();
+builder.Services.AddSingleton<PedidoService>();
 builder.Services.AddSingleton<ServicoAutenticacao>();
 
 
