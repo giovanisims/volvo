@@ -5,6 +5,7 @@ using model.dto;
 using System.ComponentModel;
 using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace service;
 
@@ -12,6 +13,7 @@ public class PedidoService
 {
     private readonly ClienteService _clienteService;
     private readonly LivroService _livroService;
+    private int _proximoNumero = 1;
 
     public PedidoService(ClienteService clienteService, LivroService livroService)
     {
@@ -26,21 +28,35 @@ public class PedidoService
         var cliente = _clienteService.GetPorLogin(dto.ClienteLogin);
         if (cliente == null || dto.Itens.Count == 0) return false;
 
-        var itens = new List<ItemDePedido>();
-        foreach (var item in dto.Itens)
-        {
-            var livro = _livroService.GetModelPorIsbn(item.Isbn);
-            if (livro == null) return false;
+        // Look for an existing order for this client that is still "aberto"
+        var pedidoExistente = cliente.Pedidos.FirstOrDefault(p => 
+            p.Situacao.Equals("aberto", StringComparison.OrdinalIgnoreCase));
 
-            itens.Add(new ItemDePedido(livro, item.Qtde, livro.Preco));
+        if (pedidoExistente != null)
+        {
+            foreach (var itemDto in dto.Itens)
+            {
+                var livro = _livroService.GetModelPorIsbn(itemDto.Isbn);
+                if (livro == null) return false;
+                pedidoExistente.InserirItem(new ItemDePedido(livro, itemDto.Qtde, livro.Preco));
+            }
+            return true;
         }
 
-        // Constructor requires the first item
+        // If no "aberto" order exists, create a new one
+        var itens = new List<ItemDePedido>();
+        foreach (var itemDto in dto.Itens)
+        {
+            var livro = _livroService.GetModelPorIsbn(itemDto.Isbn);
+            if (livro == null) return false;
+            itens.Add(new ItemDePedido(livro, itemDto.Qtde, livro.Preco));
+        }
+
         var novoPedido = new Pedido(
-            dto.NumeroPedido,
+            _proximoNumero++,
             dto.DataEmissao,
             dto.FormaPagamento,
-            dto.Situacao,
+            dto.Situacao, // This should be "aberto" in the DTO for new orders
             itens[0]
         );
 
