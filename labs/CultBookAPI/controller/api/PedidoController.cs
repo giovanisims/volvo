@@ -28,9 +28,15 @@ public class PedidoController : ControllerBase
         return BadRequest(new { message = "Falha ao realizar pedido. Verifique se o cliente existe, se os ISBNs estão corretos ou se a lista de itens está vazia." });
     }
 
-    // [HttpPost]
-    // public IActionResult FinalizarCompra([FromBody] PedidoDTO dto) {
+    [HttpPost("FinalizarCompra")]
+    public IActionResult FinalizarCompra([FromBody] FinalizarPedidoDTO dto)
+    {
+        var sucesso = _pedidoService.FinalizarCompra(dto);
+        if (sucesso) return Ok(new { message = "Compra finalizada com sucesso." });
         
-    // }
+        return BadRequest(new { message = "Falha ao finalizar compra." });
+    }
+
 }
+
 

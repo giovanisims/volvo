@@ -30,7 +30,7 @@ public class PedidoService
 
         // Look for an existing order for this client that is still "aberto"
         var pedidoExistente = cliente.Pedidos.FirstOrDefault(p => 
-            p.Situacao.Equals("aberto", StringComparison.OrdinalIgnoreCase));
+            p.Situacao.Equals("aberto"));
 
         if (pedidoExistente != null)
         {
@@ -66,5 +66,24 @@ public class PedidoService
         }
 
         return cliente.InserirPedido(novoPedido);
+    }
+
+    public bool FinalizarCompra(FinalizarPedidoDTO dto)
+    {
+        var cliente = _clienteService.GetPorLogin(dto.ClienteLogin);
+        if (cliente == null) return false;
+
+        var pedidoExistente = cliente.Pedidos.FirstOrDefault(p => 
+            p.Situacao.Equals("aberto", StringComparison.OrdinalIgnoreCase));
+
+        if (pedidoExistente != null && pedidoExistente.Itens.Count > 0)
+        {
+            foreach (var item in pedidoExistente.Itens) item.Livro.Estoque -= item.Qtde;
+            
+            pedidoExistente.Situacao = "finalizado";
+            return true;
+        }
+
+        return false;
     }
 }
