@@ -68,6 +68,8 @@ public class PedidoService
         return cliente.InserirPedido(novoPedido);
     }
 
+    // Keep in mind this method doesn't remove or move the old orders to a different place 
+    // like you would on a normal system it just changes their "situacao" tag to "finalizado" and updates stock
     public bool FinalizarCompra(FinalizarPedidoDTO dto)
     {
         var cliente = _clienteService.GetPorLogin(dto.ClienteLogin);
