@@ -27,7 +27,7 @@ allows for their implementation to be a lot more intuitive
 */
 
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options), DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext
     {
 
         // All of the tables need to be registered here with "DbSet" to actually create them
@@ -40,7 +40,7 @@ allows for their implementation to be a lot more intuitive
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // This doesn't do anyything but it's good practice to leave it here
+            // This doesn't do anything but it's good practice to leave it here
             base.OnModelCreating(modelBuilder);
             // Since we separated the configs of each class into differente files, we need this to scan for them
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
