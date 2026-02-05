@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tempcontrol")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7605ab35840bde34c74fcf487c5bef3b4e72293f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4183a6179e8b722278fc197b31b1ce544762ede8")]
 [assembly: System.Reflection.AssemblyProductAttribute("tempcontrol")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tempcontrol")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
