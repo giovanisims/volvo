@@ -8,7 +8,7 @@ public class AccessoryConfig : IEntityTypeConfiguration<Accessory>
 {
     public void Configure(EntityTypeBuilder<Accessory> builder)
     {
-        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Name).HasMaxLength(100);
 
         builder.HasOne(x => x.Vehicle)
             .WithMany(x => x.Accessories)

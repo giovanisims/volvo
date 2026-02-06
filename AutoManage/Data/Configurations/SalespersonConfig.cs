@@ -8,7 +8,7 @@ public class SalespersonConfig : IEntityTypeConfiguration<Salesperson>
 {
     public void Configure(EntityTypeBuilder<Salesperson> builder)
     {
-        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Name).HasMaxLength(100);
 
         builder.HasMany(x => x.Sales)
             .WithOne(x => x.Salesperson)

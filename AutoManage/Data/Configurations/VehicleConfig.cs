@@ -8,16 +8,19 @@ public class VehicleConfig : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        builder.HasKey(x => v.Id);
+        builder.Property(x => x.Chassis).HasMaxLength(20);
+        builder.Property(x => x.Model).HasMaxLength(100);
+        builder.Property(x => x.Color).HasMaxLength(100);
+        builder.Property(x => x.SystemVersion).HasMaxLength(100);
 
-        builder.HasIndex(x => v.Chassis).IsUnique();
+        builder.HasIndex(x => x.Chassis).IsUnique();
 
-        builder.HasOne(x => v.Owner)
+        builder.HasOne(x => x.Owner)
             .WithMany()
-            .HasForeignKey(x => v.OwnerId);
+            .HasForeignKey(x => x.OwnerId);
 
-        builder.HasMany(x => v.Accessories)
-            .WithOne(x => v.Vehicle)
-            .HasForeignKey(x => v.VehicleId);
+        builder.HasMany(x => x.Accessories)
+            .WithOne(x => x.Vehicle)
+            .HasForeignKey(x => x.VehicleId);
     }
 }

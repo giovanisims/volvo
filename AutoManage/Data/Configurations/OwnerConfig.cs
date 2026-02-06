@@ -8,10 +8,11 @@ public class OwnerConfig : IEntityTypeConfiguration<Owner>
 {
     public void Configure(EntityTypeBuilder<Owner> builder)
     {
-        builder.HasKey(x => x.Id);
-
-        builder.HasMany(x => x.Addresses)
-            .WithOne(x => x.Owner)
-            .HasForeignKey(x => x.OwnerId);
+        builder.Property(x => x.Name).HasMaxLength(100);
+        builder.Property(x => x.CPF_CNPJ).HasMaxLength(20);
+        builder.Property(x => x.Email).HasMaxLength(255);
+        builder.Property(x => x.Telephone).HasMaxLength(20);
+        builder.Property(x => x.CNH).HasMaxLength(20);
+        builder.Property(x => x.AdditionalInfo).HasMaxLength(500);
     }
 }
