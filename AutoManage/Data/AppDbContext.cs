@@ -27,7 +27,7 @@ allows for their implementation to be a lot more intuitive
 */
 
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
 
         // All of the tables need to be registered here with "DbSet" to actually create them
