@@ -9,23 +9,15 @@ namespace AutoManage.Controllers;
 public class VehiclesController(IVehicleService service) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var vehicles = await service.GetAllAsync();
-        return Ok(vehicles);
-    }
+    public async Task<IActionResult> GetAll() => Ok(await service.GetAllAsync());
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        if (await service.GetByIdAsync(id) is not Vehicle vehicle) return NotFound();
-        return Ok(vehicle);
-    }
+    public async Task<IActionResult> GetById(int id) =>
+        await service.GetByIdAsync(id) is Vehicle vehicle ? Ok(vehicle) : NotFound();
 
     [HttpPost("Register")]
     public async Task<IActionResult> Create([FromBody] Vehicle vehicle)
     {
-
         var createdVehicle = await service.CreateAsync(vehicle);
         /* We have no real front-end so it's technically unecessary to have a complex return like this
         But it would be best practice in the real world
