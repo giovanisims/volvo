@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using AutoManage.Model;
+using AutoManage.Models;
 
 namespace AutoManage.Data
 

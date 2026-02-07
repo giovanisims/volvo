@@ -1,14 +1,14 @@
 
-namespace AutoManage.Model;
+namespace AutoManage.Models;
 
 public class Owner
 {
     public int Id {get;set;}
-    public string Name {get;set;}
-    public string CPF_CNPJ {get;set;}
-    public List<Address> Addresses {get;set;}
-    public string Email {get;set;}
-    public string Telephone {get;set;}
+    public required string Name {get;set;}
+    public required string CPF_CNPJ {get;set;}
+    public ICollection<Address> Addresses {get;set;} = new HashSet<Address>();
+    public required string Email {get;set;}
+    public required string Telephone {get;set;}
     // I'm not 100% sure what "DadosPessoais" means so I decided to instead implement these three attributes
     // "BirthDate" is useful for age checks and in a real world system targeted advertising
     // "CNH" is self-explanatory

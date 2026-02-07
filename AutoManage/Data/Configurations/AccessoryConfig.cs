@@ -1,4 +1,4 @@
-using AutoManage.Model;
+using AutoManage.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,16 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using AutoManage.Data;
+using AutoManage.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// ---- DATABASE
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); 
+// ---- SWAGGER
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); 
+// ---- BUSINESS LOGIC
+builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 var app = builder.Build();
 
