@@ -1,58 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AutoManage.Data;
 using AutoManage.Models;
+using AutoManage.Services;
 
 namespace AutoManage.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AccessoryController(AppDbContext context) : ControllerBase
+public class AccessoryController(IAccessoryService service) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var accessories = await context.Accessories.ToListAsync();
-        return Ok(accessories);
-    }
+    public async Task<IActionResult> GetAll() => Ok(await service.GetAllAsync());
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        if (await context.Accessories.FindAsync(id) is not Accessory accessory) return NotFound();
-        return Ok(accessory);
-    }
+    public async Task<IActionResult> GetById(int id) => Ok(await service.GetByIdAsync(id));
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Accessory accessory)
     {
-        context.Accessories.Add(accessory);
-        await context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = accessory.Id }, accessory);
+        var createdAccessory = await service.CreateAsync(accessory);
+        return CreatedAtAction(nameof(GetById), new { id = accessory.Id }, createdAccessory);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Accessory accessory)
-    {
-        if (id != accessory.Id) return BadRequest();
-        context.Entry(accessory).State = EntityState.Modified;
-
-        try { await context.SaveChangesAsync(); }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!context.Accessories.Any(a => a.Id == id)) return NotFound();
-            throw;
-        }
-
-        return NoContent();
-    }
+    public async Task<IActionResult> Update(int id, [FromBody] Accessory accessory) =>
+        await service.UpdateAsync(id, accessory) ? NoContent() : NotFound();
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        if (await context.Accessories.FindAsync(id) is not Accessory accessory) return NotFound();
-        context.Accessories.Remove(accessory);
-        await context.SaveChangesAsync();
-        return NoContent();
-    }
+    public async Task<IActionResult> Delete(int id) =>
+        await service.DeleteAsync(id) ? NoContent() : NotFound();
 }

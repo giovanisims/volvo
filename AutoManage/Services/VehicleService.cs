@@ -21,6 +21,9 @@ public class VehicleService(AppDbContext context) : IVehicleService
 
     public async Task<bool> UpdateAsync(int id, Vehicle vehicle)
     {
+        // Good practice to check if there is a discrepancy between the user provided one and the object
+        if (id != vehicle.Id) return false;
+
         /* At first "context" (the db connection) has never seen this specific vehicle object before, since
         it was created from the user's JSON, so we call "Entry()" so that "EF" starts tracking the object, 
         but it sees that it has the same id as another vehicle already in the database, so it assumes it's the

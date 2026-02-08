@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // ---- BUSINESS LOGIC
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IAccessoryService, AccessoryService>();
 
 var app = builder.Build();
 
