@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using AutoManage.Data;
 using AutoManage.Models;
 
+using AutoManage.Services.Interfaces;
+
 namespace AutoManage.Services;
 
 // Technically primary constructors are less safe since you cant make the "context" field readonly

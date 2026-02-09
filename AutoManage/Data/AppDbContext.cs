@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AutoManage.Models;
 
-namespace AutoManage.Data
+namespace AutoManage.Data;
 
 /*
 Long comment about how DbContext and stuff works bellow, skip if you dont care
@@ -26,7 +26,6 @@ In practice a lot of these objects dont ACTUALLY function like this, but thinkin
 allows for their implementation to be a lot more intuitive 
 */
 
-{
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
 
@@ -46,4 +45,3 @@ allows for their implementation to be a lot more intuitive
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }
     }
-}

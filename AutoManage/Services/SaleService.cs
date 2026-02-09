@@ -2,6 +2,8 @@ using AutoManage.Data;
 using AutoManage.Models;
 using Microsoft.EntityFrameworkCore;
 
+using AutoManage.Services.Interfaces;
+
 namespace AutoManage.Services;
 
 public class SaleService(AppDbContext context) : BaseService<Sale>(context), ISaleService

@@ -1,6 +1,6 @@
 using AutoManage.Models;
 
-namespace AutoManage.Services;
+namespace AutoManage.Services.Interfaces;
 
 // "T" is a "Type parameter" that acts as a variable for the class names, ": class, IEntity" "class" means that "T"
 // is a "Reference Type" which means that it can be ANY class, and then IEntity means that that class

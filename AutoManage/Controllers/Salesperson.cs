@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoManage.Models;
-using AutoManage.Services;
+using AutoManage.Services.Interfaces;
 
 namespace AutoManage.Controllers;
 

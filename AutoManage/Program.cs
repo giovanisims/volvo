@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AutoManage.Data;
 using AutoManage.Services;
+using AutoManage.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
