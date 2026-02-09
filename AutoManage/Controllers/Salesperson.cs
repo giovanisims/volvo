@@ -7,4 +7,4 @@ namespace AutoManage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 // Inherits all HTTP methods automatically
-public class AddressController(IBaseService<Address> service) : BaseController<Address>(service);
+public class SalespeopleController(IBaseService<Salesperson> service) : BaseController<Salesperson>(service);
