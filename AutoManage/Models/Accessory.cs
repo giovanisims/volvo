@@ -7,7 +7,5 @@ public class Accessory : IEntity
     public required string Name { get; set; }
 
     public required int VehicleId { get; set; }
-
-    [JsonIgnore]
     public Vehicle? Vehicle { get; set; }
 }

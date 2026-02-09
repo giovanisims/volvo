@@ -9,7 +9,7 @@ public interface IBaseService<T> where T : class, IEntity
 {
     // We use IEnumerable because it's just a readonly stream instead of a complicated List with methods
     Task<IEnumerable<T>> GetAllAsync();
-    Task<T?> GetByIdAsync(int id);
+    Task<T?> GetByIdAsync(int id, params string[] includes);
     Task<T> CreateAsync(T entity);
     Task<bool> UpdateAsync(int id, T entity);
     Task<bool> DeleteAsync(int id);

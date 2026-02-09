@@ -5,8 +5,6 @@ using AutoManage.Services.Interfaces;
 
 namespace AutoManage.Services;
 
-// Technically primary constructors are less safe since you cant make the "context" field readonly
-// but they look 100 times better and just like dont overwrite the database context 
 public class BaseService<T>(AppDbContext context) : IBaseService<T> where T : class, IEntity
 {
     protected readonly AppDbContext _context = context;
@@ -14,7 +12,13 @@ public class BaseService<T>(AppDbContext context) : IBaseService<T> where T : cl
     // Task is the async return type, it only handles basic threading mechanics, it doesn't even do timeouts
     public virtual async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
-    public virtual async Task<T?> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
+    // "params" is a keywords that lets you pass any number of arguments
+    public virtual async Task<T?> GetByIdAsync(int id, params string[] includes)
+    {
+        var query = _context.Set<T>().AsQueryable();
+        foreach (var include in includes) query = query.Include(include);
+        return await query.FirstOrDefaultAsync(e => e.Id == id);
+    }
 
     public virtual async Task<T> CreateAsync(T entity)
     {

@@ -9,6 +9,9 @@ namespace AutoManage.Controllers;
 // Inherits all HTTP methods automatically
 public class VehiclesController(IVehicleService service) : BaseController<Vehicle>(service)
 {
+    [HttpGet("{id}")]
+    public override async Task<IActionResult> GetById(int id) => Ok(await service.GetByIdAsync(id, "Owner"));
+
     [HttpGet("system/{version}")]
     public async Task<IActionResult> GetBySystemVersion(string version) =>
         Ok(await service.GetBySystemVersionOrderedByOdometerAsync(version));

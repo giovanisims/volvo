@@ -13,7 +13,5 @@ public class Address : IEntity
     public string? Complement { get; set; }
 
     public required int OwnerId { get; set; }
-
-    [JsonIgnore]
     public Owner? Owner { get; set; }
 }
