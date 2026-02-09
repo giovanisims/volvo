@@ -4,29 +4,21 @@ using AutoManage.Models;
 
 namespace AutoManage.Services;
 
-public interface IBaseService<T> where T : class, IEntity
-{
-    // We use IEnumerable because it's just a readonly stream instead of a complicated List with methods
-    Task<IEnumerable<T>> GetAllAsync();
-    Task<T?> GetByIdAsync(int id);
-    Task<T> CreateAsync(T entity);
-    Task<bool> UpdateAsync(int id, T entity);
-    Task<bool> DeleteAsync(int id);
-}
-
 // Technically primary constructors are less safe since you cant make the "context" field readonly
 // but they look 100 times better and just like dont overwrite the database context 
 public class BaseService<T>(AppDbContext context) : IBaseService<T> where T : class, IEntity
 {
+    protected readonly AppDbContext _context = context;
+
     // Task is the async return type, it only handles basic threading mechanics, it doesn't even do timeouts
-    public async Task<IEnumerable<T>> GetAllAsync() => await context.Set<T>().ToListAsync();
+    public virtual async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
-    public async Task<T?> GetByIdAsync(int id) => await context.Set<T>().FindAsync(id);
+    public virtual async Task<T?> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
 
-    public async Task<T> CreateAsync(T entity)
+    public virtual async Task<T> CreateAsync(T entity)
     {
-        context.Set<T>().Add(entity);
-        await context.SaveChangesAsync();
+        _context.Set<T>().Add(entity);
+        await _context.SaveChangesAsync();
         return entity;
     }
 
@@ -45,11 +37,11 @@ public class BaseService<T>(AppDbContext context) : IBaseService<T> where T : cl
         if, for example, the payload is missing a Date field since it would be replaced by the default date.
         
         However "blind updates" like this consume half the I/O, and are actually more REST compliant */
-        context.Entry(entity).State = EntityState.Modified;
+        _context.Entry(entity).State = EntityState.Modified;
 
         try
         {
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return true;
         }
         // Edge case where entry gets deleted while being edited
@@ -66,7 +58,7 @@ public class BaseService<T>(AppDbContext context) : IBaseService<T> where T : cl
                     ELSE CAST(0 AS BIT)
                 END
                 Which is near instant */
-            if (!await context.Set<T>().AnyAsync(e => e.Id == id)) return false;
+            if (!await _context.Set<T>().AnyAsync(e => e.Id == id)) return false;
             // If the entity was found and it STILL failed to update, might as well let it crash
             throw;
         }
@@ -74,10 +66,10 @@ public class BaseService<T>(AppDbContext context) : IBaseService<T> where T : cl
 
     public async Task<bool> DeleteAsync(int id)
     {
-        if (await context.Set<T>().FindAsync(id) is not T entity) return false;
+        if (await _context.Set<T>().FindAsync(id) is not T entity) return false;
 
-        context.Set<T>().Remove(entity);
-        await context.SaveChangesAsync();
+        _context.Set<T>().Remove(entity);
+        await _context.SaveChangesAsync();
         return true;
     }
 }

@@ -7,4 +7,11 @@ namespace AutoManage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 // Inherits all HTTP methods automatically
-public class VehiclesController(IBaseService<Vehicle> service) : BaseController<Vehicle>(service);
+public class VehiclesController(IVehicleService service) : BaseController<Vehicle>(service)
+{
+    [HttpGet("system/{version}")]
+    public async Task<IActionResult> GetBySystemVersion(string version)
+    {
+        return Ok(await service.GetBySystemVersionOrderedByOdometerAsync(version));
+    }
+}
