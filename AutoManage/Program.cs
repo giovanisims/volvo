@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // ---- BUSINESS LOGIC
 builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<ISalespersonService, SalespersonService>();
 
 var app = builder.Build();
 

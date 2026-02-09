@@ -7,4 +7,8 @@ namespace AutoManage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 // Inherits all HTTP methods automatically
-public class SalespeopleController(IBaseService<Salesperson> service) : BaseController<Salesperson>(service);
+public class SalespeopleController(ISalespersonService service) : BaseController<Salesperson>(service)
+{
+    [HttpGet("Comission/{id}")]
+    public async Task<IActionResult> FinalSalary(int id) => Ok(await service.FinalSalaryAsync(id));
+}

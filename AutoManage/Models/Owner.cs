@@ -1,4 +1,4 @@
-
+using System.Text.Json.Serialization;
 namespace AutoManage.Models;
 
 public class Owner : IEntity
@@ -6,6 +6,7 @@ public class Owner : IEntity
     public int Id { get; set; }
     public required string Name { get; set; }
     public required string CPF_CNPJ { get; set; }
+    [JsonIgnore]
     public ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
     public required string Email { get; set; }
     public required string Telephone { get; set; }

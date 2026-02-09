@@ -1,7 +1,6 @@
 using AutoManage.Data;
 using AutoManage.Models;
 using Microsoft.EntityFrameworkCore;
-
 using AutoManage.Services.Interfaces;
 
 namespace AutoManage.Services;

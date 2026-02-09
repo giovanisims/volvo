@@ -1,4 +1,4 @@
-
+using System.Text.Json.Serialization;
 namespace AutoManage.Models;
 
 public class Salesperson : IEntity
@@ -6,5 +6,6 @@ public class Salesperson : IEntity
     public int Id { get; set; }
     public required string Name { get; set; }
     public required decimal Salary { get; set; }
+    [JsonIgnore]
     public ICollection<Sale> Sales { get; set; } = new HashSet<Sale>();
 }

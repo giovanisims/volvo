@@ -10,8 +10,6 @@ namespace AutoManage.Controllers;
 public class VehiclesController(IVehicleService service) : BaseController<Vehicle>(service)
 {
     [HttpGet("system/{version}")]
-    public async Task<IActionResult> GetBySystemVersion(string version)
-    {
-        return Ok(await service.GetBySystemVersionOrderedByOdometerAsync(version));
-    }
+    public async Task<IActionResult> GetBySystemVersion(string version) =>
+        Ok(await service.GetBySystemVersionOrderedByOdometerAsync(version));
 }
