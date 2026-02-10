@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoManage.Models;
 using AutoManage.Services.Interfaces;
+using AutoMapper;
 
 namespace AutoManage.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BaseController<T>(IBaseService<T> service) : ControllerBase where T : class, IEntity
-{
+public class BaseController<T, TCreateDto>(IBaseService<T> service, IMapper mapper) : ControllerBase 
+    where T : class, IEntity
+    {
     [HttpGet]
     public virtual async Task<IActionResult> GetAll() => Ok(await service.GetAllAsync());
 
@@ -16,8 +18,9 @@ public class BaseController<T>(IBaseService<T> service) : ControllerBase where T
         await service.GetByIdAsync(id) is T entity ? Ok(entity) : NotFound();
 
     [HttpPost]
-    public virtual async Task<IActionResult> Create([FromBody] T entity)
+    public virtual async Task<IActionResult> Create([FromBody] TCreateDto dto)
     {
+        var entity = mapper.Map<T>(dto);
         var createdEntity = await service.CreateAsync(entity);
         
         /* We have no real front-end so it's technically unnecessary to have a complex return like this
