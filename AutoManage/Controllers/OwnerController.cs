@@ -9,4 +9,5 @@ namespace AutoManage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 // Inherits all HTTP methods automatically
-public class OwnersController(IBaseService<Owner> service, IMapper mapper) : BaseController<Owner, CreateOwnerDTO>(service, mapper);
+public class OwnersController(IBaseService<Owner> service, IMapper mapper)
+    : BaseController<Owner, CreateOwnerDTO>(service, mapper);

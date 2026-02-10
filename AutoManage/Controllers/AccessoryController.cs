@@ -9,4 +9,5 @@ namespace AutoManage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 // Inherits all HTTP methods automatically
-public class AccessoriesController(IBaseService<Accessory> service, IMapper mapper) : BaseController<Accessory, CreateAccessoryDTO>(service, mapper);
+public class AccessoriesController(IBaseService<Accessory> service, IMapper mapper)
+    : BaseController<Accessory, CreateAccessoryDTO>(service, mapper);

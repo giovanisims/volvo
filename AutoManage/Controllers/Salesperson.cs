@@ -9,8 +9,10 @@ namespace AutoManage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 // Inherits all HTTP methods automatically
-public class SalespeopleController(ISalespersonService service, IMapper mapper) : BaseController<Salesperson, CreateSalespersonDTO>(service, mapper)
+public class SalespeopleController(ISalespersonService service, IMapper mapper)
+    : BaseController<Salesperson, CreateSalespersonDTO>(service, mapper)
+
 {
-    [HttpGet("Comission/{id}")]
+    [HttpGet("FinalSalary/{id}")]
     public async Task<IActionResult> FinalSalary(int id) => Ok(await service.FinalSalaryAsync(id));
 }
