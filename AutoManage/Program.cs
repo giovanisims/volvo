@@ -12,10 +12,13 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// ---- AUTOMAPPER
+builder.Services.AddAutoMapper(typeof(Program));
 // ---- BUSINESS LOGIC
 builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<ISalespersonService, SalespersonService>();
+
 
 var app = builder.Build();
 

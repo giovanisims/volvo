@@ -169,3 +169,5 @@
 /home/giovanisims/github/volvo/AutoManage/obj/Debug/net10.0/AutoManage.pdb
 /home/giovanisims/github/volvo/AutoManage/obj/Debug/net10.0/AutoManage.genruntimeconfig.cache
 /home/giovanisims/github/volvo/AutoManage/obj/Debug/net10.0/ref/AutoManage.dll
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoMapper.dll
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
