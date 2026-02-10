@@ -131,7 +131,7 @@ Content-Type: application/json
 {
   "vehicleId": 2,
   "salespersonId": 1,
-  "saleDate": "2024-02-10T10:00:00Z",
+  "saleDate": "2026-02-09T10:00:00Z",
   "salePrice": 345000.00
 }
 
