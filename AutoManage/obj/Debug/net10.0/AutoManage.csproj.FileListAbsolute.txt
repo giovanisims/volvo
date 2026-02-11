@@ -193,3 +193,13 @@
 /home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/obj/AutoManage.Tests.csproj.nuget.dgspec.json
 /home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/obj/project.assets.json
 /home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/obj/Debug/net10.0/AutoManage.Tests.sourcelink.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/appsettings.Development.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/appsettings.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.deps.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.runtimeconfig.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.staticwebassets.endpoints.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests.deps.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests.runtimeconfig.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/obj/AutoManage.Tests.csproj.nuget.dgspec.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/obj/project.assets.json
+/home/giovanisims/github/volvo/AutoManage/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/bin/Debug/net10.0/AutoManage.Tests/obj/Debug/net10.0/AutoManage.Tests.sourcelink.json
